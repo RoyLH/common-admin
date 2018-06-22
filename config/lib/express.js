@@ -1,0 +1,20 @@
+'use strict';
+
+const config = require('../config'),
+    express = require('express'),
+    bodyParser = require('body-parser'),
+    session = require('express-session'),
+    MongoStore = require('connect-mongo')(session),
+    favicon = require('serve-favicon'),
+    responseTime = require('response-time'),
+    methodOverride = require('method-override'),
+    cookieParser = require('cookie-parser'),
+    helmet = require('helmet'),
+    flash = require('connect-flash'),
+    hbs = require('express-hbs'),
+    expressValidator = require('express-validator'),
+    path = require('path'),
+    expressWinston = require('express-winston'),
+    lusca = require('lusca'),
+    authHelper = require(path.resolve('./config/lib/auth')),
+    responseHandler = require(path.resolve('./config/lib/response'));
