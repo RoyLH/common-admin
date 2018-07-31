@@ -1,0 +1,208 @@
+{
+    "common": {
+        "CREATE":"Create",
+        "UPDATE":"Update",
+        "EDIT":"Edit",
+        "DELETE":"Delete",
+        "CANCEL":"Cancel",
+        "CONFIRM":"Confirm",
+        "RESET":"Reset",
+        "SAVE":"Save",
+        "DOWNLOAD":"Download",
+        "SUBMIT":"Submit",
+        "BLOCK":"Block",
+        "ACTIVATE":"Activate",
+        "ERROR":"Error",
+        "WARNING":"Warning",
+        "SUCCESS":"Success",
+        "LOG":"Log",
+        "INFO":"Info"
+    },
+    "error": {
+        "MIN_LENGTH":"Minimum Length is {{length}}",
+        "MAX_LENGTH":"Maximum Length is {{length}}",
+        "INVALID_EMAIL":"Invalid email address",
+        "ALPHABET":"Alphabet only"
+    },
+    "core": {
+        "CHANGE_PASSWORD":"Change Password",
+        "FULL_SCREEN":"Full Screen",
+        "SMALL_SCREEN":"Small Screen",
+        "LOGIN":"Login",
+        "LOGOUT":"Sign Out",
+        "CONFIRM":"Confirm"
+    },
+    "config": {
+        "MENUS":"Menus",
+        "NAME":"Name",
+        "STATE":"State",
+        "MOBILE":"Mobile",
+        "DEFAULT":"Default",
+        "ADMIN":"Admin",
+        "HORIZON":"Horizon",
+        "ACTIONS":"Actions",
+        "NEW_MENU":"New Menu",
+        "UPDATE_MENU":"Update Menu",
+        "NEW_MENU_NAME": "Name",
+        "NEW_MENU_STATE": "State",
+        "DRAG_MENU": "Drag Menu"
+    },
+    "client": {
+        "TITLE":"TITLE LIST",
+        "NAME": "Client Name",
+        "ID": "Client ID",
+        "SECRET": "Client Secret",
+        "URL": "URL",
+        "STATUS": "Status",
+        "ACTIONS": "Actions",
+        "NEW_CLIENT": "New Client",
+        "EDIT_CLIENT": "Edit Client",
+        "RESET_TOKEN":"Reset Token"
+    },
+    "feedback": {
+        "TITLE":"Feedback List",
+        "STATUS":"Status",
+        "NAME":"Feedback Name",
+        "LEVEL":"Level",
+        "NOTES":"Notes",
+        "CLIENT":"Client",
+        "CREATE":"Created",
+        "ACTIONS":"Actions",
+        "ALL_STATUS":"All Status"
+    },
+    "file": {
+        "TITLE":"File List",
+        "BACK":"Back",
+        "FORWARD":"Forward",
+        "UPLOAD":"Upload",
+        "NEW_FOLDER":"New Folder",
+        "REMOVE_CHECKED":"Remove Checked",
+        "DOWNLOAD_CHECKED":"Download Checked",
+        "TEST":"Test",
+        "TYPE":"Type",
+        "NAME":"Name",
+        "CREATED":"Created",
+        "SIZE":"Size",
+        "ACTIONS":"Action",
+        "FOLDER_NAME":"Folder name"
+    },
+    "cache": {
+        "TITLE":"Redis",
+        "KEY":"Key",
+        "ACTIONS":"Action"
+    },
+    "message":{
+        "TITLE":"Message",
+        "NEW_MESSAGE":"New Message",
+        "IMPORT_JSON":"Import JSON",
+        "EXPORT_JSON":"Export JSON",
+        "CODE":"Code",
+        "CLIENTS":"Clients",
+        "English":"English",
+        "Chinese":"Chinese",
+        "TYPE":"Type",
+        "ACTIONS":"Action",
+        "SELECT_TYPE":"Select Type",
+        "WRITE_YOUR_JSON":"Write your JSON",
+        "IMPORT":"Import",
+        "EXPORT":"Export"
+    },
+    "email":{
+        "TITLE":"Email List",
+        "NEW_TEMPLATE":"New Email Template",
+        "EXPORT":"Export",
+        "EMAIL_TITLE":"Title",
+        "EMAIL_NAME":"Name",
+        "EMAIL_TARGET":"Target",
+        "EMAIL_SUBJECT":"Subject",
+        "EMAIL_CONTENT":"Content",
+        "NO_TEMPLATE":"No template found",
+        "TEST":"Test Template",
+        "WRITE_YOUR_JSON":"Write your JSON",
+        "SEND_TEST_EMAIL":"Send Test Email",
+        "DISPLAY_NAME":"Display Name",
+        "EMAIL_ADDRESS":"Email",
+        "SEND":"Send"
+    },
+    "auth": {
+        "LOG_IN":"Log In",
+        "EMAIL":"Email",
+        "PASSWORD":"Password",
+        "OLD_PASSWORD":"Old Password",
+        "NEW_PASSWORD":"New Password",
+        "CONFIRM_PASSWORD":"Confirm Password"
+    },
+    "password": {
+        "TITLE":"Change Password",
+        "OLD_PASSWORD":"Old Password",
+        "NEW_PASSWORD":"New Password",
+        "CONFIRM_PASSWORD":"Confirm Password",
+        "DIFFERENT_OLD":"Must Be The Different From Old Password",
+        "SAME_ABOVE":"Must Be The Same As Above"
+    },
+    "home": {
+        "TITLE": "Welcome to common-service!",
+        "HOME": "Home",
+        "DASHBOARD": "Dashboard",
+        "SUB_TITLE": "Common Services V2.0",
+        "USAGE": "Usage",
+        "TODO": "To do",
+        "BASED_ON": "Based on MEAN.JS V0.5.0"
+    },
+    "not-found": {
+        "TITLE": "You Look Lost",
+        "HOME": "Home"
+    },
+    "bad-request": {
+        "TITLE":"Bad Request",
+        "HOME":"Home"
+    },
+    "no-permission": {
+        "TITLE": "You don't have permission",
+        "HOME":"Home"
+    },
+    "localization": {
+        "TITLE": "Language Anchor",
+        "LANGUAGE_ANCHORS":"Language Anchors",
+        "LANGUAGE": "Language",
+        "NEW_ANCHOR": "New Language Anchor",
+        "NEW_LANGUAGE":"New Language",
+        "IMPORT":"Import",
+        "EXPORT":"Export",
+        "NAME":"Name",
+        "KEY":"Key",
+        "CLIENTS": "Clients",
+        "English":"English",
+        "Chinese":"Chinese",
+        "ACTION":"Action",
+        "CODE":"Code"
+    },
+    "staff": {
+        "TITLE":"Staff List",
+        "EMAIL":"Email",
+        "DISPLAY_NAME":"Display Name",
+        "STATUS":"Status",
+        "ADMIN":"Admin",
+        "ACTIONS":"Actions",
+        "NEW_STAFF":"New Staff",
+        "FIRST_NAME":"First Name",
+        "LAST_NAME":"Last Name",
+        "UPDATE_STAFF":"Update Staff",
+        "REASON":"Reason"
+    },
+    "user": {
+        "TITLE":"Users List",
+        "EMAIL":"Email",
+        "DISPLAY_NAME":"Display Name",
+        "STATUS":"Status",
+        "ACTIONS":"Actions",
+        "SEARCH_USER":"Search User",
+        "NEW_USER":"New User",
+        "FIRST_NAME":"First Name",
+        "MIDDLE_NAME":"Middle Name (Optional)",
+        "LAST_NAME":"Last Name",
+        "UPDATE_USER":"Update User",
+        "REASON":"Reason",
+        "NO_USER":"No User Found"
+    }
+}

@@ -1,0 +1,11 @@
+.modal-message .modal-dialog {
+	width: 450px;
+}
+
+.modal-message .modal-body {
+	padding: 20px 15px;
+}
+
+.modal-message .title-icon {
+	margin-right: 5px;
+}

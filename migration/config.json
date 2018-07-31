@@ -1,0 +1,40 @@
+[
+  {
+    "state": "dashboard.config",
+    "name": "Config",
+    "mobile": false,
+    "roles": [
+      "superuser"
+    ],
+    "order": 0
+  },
+  {
+    "state": "dashboard.message",
+    "name": "Message",
+    "mobile": false,
+    "roles": [
+      "superuser",
+      "admin"
+    ],
+    "order": 1
+  },
+  {
+    "state": "dashboard.client",
+    "name": "Client",
+    "mobile": false,
+    "roles": [
+      "superuser"
+    ],
+    "order": 2
+  },
+  {
+    "state": "dashboard.feedback",
+    "name": "Feedback",
+    "mobile": false,
+    "roles": [
+      "superuser",
+      "admin"
+    ],
+    "order": 3
+  }
+]

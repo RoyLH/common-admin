@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="panel login-form">
+    <div class="panel-heading">
+      <div class="sit-logo text-center">
+        <img src="/modules/core/client/img/logo.png" alt="Project">
+      </div>
+    </div>
+    <div class="panel-body">
+      <div ng-include="" src="vm.templates[vm.currentAction].tpl"></div>
+    </div>
+  </div>
+</div>
+<script type="text/ng-template" id="/login_form">
+  <form id="loginform" role="form" name="loginform" ng-submit="vm.submitForm(loginform.$valid)" novalidate>
+    <div class="form-group" ng-class="{ 'has-error' : loginform.username.$invalid && !loginform.username.$pristine }">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input id="login-username" type="text" class="form-control" ng-model="vm.user.email" value=""
+               placeholder="{{'auth.EMAIL' || 'Email' | translate}}" name="username" ng-pattern="validation.email" required autofocus>
+      </div>
+      <p ng-show="loginform.username.$error.pattern" class="help-block ng-hide" translate="auth.INVALID_EMAIL">Invalid email address</p>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error' : loginform.password.$invalid && !loginform.password.$pristine }">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+        <input id="login-password" type="password" class="form-control" ng-model="vm.user.password"
+               placeholder="{{'auth.PASSWORD' || 'Password' | translate}}" name="password" ng-minlength="6" required>
+      </div>
+      <p ng-show="loginform.password.$error.minlength" class="help-block ng-hide" translate="error.MIN_LENGTH" translate-values="{length: 6}">Minimum Length is 6</p>
+    </div>
+    <div class="controls">
+      <button id="btn-login" ng-click="vm.login()" ng-disabled="loginform.$invalid" class="btn btn-block btn-default">
+        <span translate="auth.LOG_IN">Log in</span>
+      </button>
+    </div>
+  </form>
+</script>
+<script type="text/ng-template" id="/firstlogin_form">
+  <form id="firstlogin_form" role="form" ng-keypress="submit($event)" name="firstloginform"
+        ng-submit="vm.submitForm(firstloginform.$valid)" novalidate>
+    <div class="form-group"
+         ng-class="{ 'has-error' : firstloginform.password.$invalid && !firstloginform.password.$pristine }">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input type="password" id="old_password" ng-model="vm.changepass.password" placeholder="{{'auth.OLD_PASSWORD' || 'Old Password' | translate}}"
+               class="form-control" name="password" ng-minlength="6" required autofocus>
+      </div>
+      <p ng-show="firstloginform.password.$error.minlength" class="help-block ng-hide" translate="error.MIN_LENGTH" translate-values="{length: 6}">Minimum Length
+        is 6</p>
+    </div>
+    <div class="form-group"
+         ng-class="{ 'has-error' : firstloginform.newpassword.$invalid && !firstloginform.newpassword.$pristine }">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input type="password" id="new_password" ng-model="vm.changepass.newPassword" placeholder="{{'auth.NEW_PASSWORD' || 'New Password' | translate}}"
+               class="form-control" name="newpassword" ng-minlength="6" required>
+      </div>
+      <p ng-show="firstloginform.newpassword.$error.minlength" class="help-block ng-hide" translate="error.MIN_LENGTH" translate-values="{length: 6}">Minimum
+        Length is 6</p>
+    </div>
+    <div class="form-group"
+         ng-class="{ 'has-error' : firstloginform.confirmnewpwd.$invalid && !firstloginform.confirmnewpwd.$pristine }">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input type="password" ng-model="vm.changepass.confirmPassword" placeholder="{{'auth.CONFIRM_PASSWORD' || 'Confirm Password' | translate}}"
+               class="form-control" name="confirmnewpwd" ng-minlength="6" required>
+      </div>
+      <p ng-show="firstloginform.confirmnewpwd.$error.minlength" class="help-block ng-hide" translate="error.MIN_LENGTH" translate-values="{length: 6}">Minimum
+        Length is 6</p>
+    </div>
+    <div class="controls">
+      <input type="button" value="Submit" ng-click="vm.changePassword()" ng-disabled="firstloginform.$invalid"
+             class="btn btn-default btn-block">
+    </div>
+  </form>
+</script>

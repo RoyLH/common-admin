@@ -1,0 +1,9 @@
+{{!< layout.server.view.html}}
+{{#contentFor "content"}}
+<section ui-view></section>
+<!--Embedding The User Object-->
+<script type="text/javascript">
+    var user = {{{ user }}};
+    var config = {{{ config }}};
+</script>
+{{/contentFor}}

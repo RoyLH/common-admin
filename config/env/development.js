@@ -2,7 +2,7 @@
 
 const defaultEnvConfig = require('./default'),
     path = require('path'),
-    winston = require('winton'),
+    winston = require('winston'),
     DailyRotateFile = require('winston-daily-rotate-file');
 
 module.exports = {

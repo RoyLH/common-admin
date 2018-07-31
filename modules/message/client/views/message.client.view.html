@@ -1,0 +1,134 @@
+<div id="admin_message_container" ng-init="vm.init()">
+    <div class="panel panel-default clearfix">
+        <div class="panel-heading hidden-xs">
+            <div class="panel-title">
+                <h2 translate="message.TITLE">message</h2>
+            </div>
+        </div>
+        <div class="panel-body">
+            <button ng-click="vm.showModal('CREATE')" class="btn btn-default">
+                <i class="glyphicon glyphicon-plus btn-icon"></i>
+                <span translate="message.NEW_MESSAGE">New Message</span>
+            </button>
+            <!--<div class="col-xs-5 col-lg-2">-->
+            <!--<input type="search" class="form-control" placeholder="Search by code"-->
+            <!--ng-model="vm.searchedCode">-->
+            <!--</div>-->
+            <div class="pull-right">
+                <button class="btn btn-default" ng-click="vm.showModal('IMPORT')">
+                    <span translate="message.IMPORT_JSON">Import JSON</span>
+                </button>
+                <button class="btn btn-default" ng-click="vm.showModal('EXPORT', vm.messages)">
+                    <span translate="message.EXPORT_JSON">Export JSON</span>
+                </button>
+            </div>
+
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th><span translate="message.CODE">code</span></th>
+                    <th><span translate="message.CLIENTS">clients</span></th>
+                    <th><span translate="message.English">english</span></th>
+                    <th><span translate="message.Chinese">chinese</span></th>
+                    <th><span translate="message.TYPE">type</span></th>
+                    <th class="text-center"><span translate="message.ACTIONS">action</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-if="$index>=vm.options.limit*(vm.options.page-1) && $index<vm.options.limit*vm.options.page"
+                    ng-repeat="message in vm.messages|orderBy: 'code'">
+                    <td ng-bind="message.code"></td>
+                    <td>
+                        <p ng-if="message.clients.length === 0">all</p>
+                        <p ng-if="message.clients.length > 0" ng-repeat="client in message.clients"
+                           ng-bind="client"></p>
+                    </td>
+                    <td ng-bind="message.content.en"></td>
+                    <td ng-bind="message.content.cn"></td>
+                    <td ng-bind="{1: 'error', 2: 'warning', 3: 'info', 4: 'success'}[message.type]"></td>
+                    <td class="text-center">
+                        <a class="action-icon glyphicon glyphicon-edit" title="{{'common.EDIT' || 'Edit' | translate}}" href="javascript:void(0)"
+                           ng-click="vm.showModal('UPDATE', message)"></a>
+                        <a class="action-icon glyphicon glyphicon-trash" title="{{'common.DELETE' || 'Delete' | translate}}"
+                           href="javascript:void(0)"
+                           ng-click="vm.remove(message)"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div align="center" ng-if="vm.messages.length/vm.options.limit>1">
+                <uib-pagination boundary-links="true" items-per-page="vm.options.limit"
+                                max-size="3" total-items="vm.messages.length" ng-model="vm.options.page"
+                                class="pagination-sm"
+                                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                </uib-pagination>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="/message_edit_modal_html">
+    <div class="modal-header">
+        <h3 class="modal-title" translate="message.NEW_MESSAGE">Add New Message</h3>
+    </div>
+    <form role="form" ng-init="vm.init()">
+        <div class="modal-body">
+            <div class="form-group">
+                <label translate="message.CODE">Code</label>
+                <input autofocus type="text" ng-model="vm.submittedMessage.code" placeholder="{{'message.CODE' || 'Code' | translate}}"
+                       class="form-control">
+            </div>
+            <div class="form-group" ng-repeat="language in vm.languages">
+                <label ng-bind="'message.' + language.name || language.name | translate"></label>
+                <input type="text" ng-model="vm.submittedMessage.content[language.code]" placeholder="{{'message.' + language.name || language.name | translate}}"
+                       class="form-control">
+            </div>
+            <div class="form-group input-group">
+                <label translate="message.CLIENTS">Clients</label>
+                <div ng-repeat="client in vm.clients">
+                    <label>
+                        <input type="checkbox" ng-model="client.isChecked">
+                        <span ng-bind="client.clientName"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label translate="message.TYPE">Type</label>
+                <select type="text" ng-model="vm.submittedMessage.type"
+                        class="form-control"
+                        ng-options="type.value as 'common.' + type.name | translate for type in vm.messageTypes">
+                    <option value="">--{{'message.SELECT_TYPE' || 'Select Type' | translate}}--</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer text-right">
+            <button class="btn"
+                    ng-click="$dismiss()"><i class="btn-icon glyphicon glyphicon-remove"></i><span translate="common.CANCEL">Cancel</span>
+            </button>
+            <button
+                ng-disabled="!vm.submittedMessage.code || !vm.submittedMessage.content || (!vm.submittedMessage.type && vm.submittedMessage.type!=0)"
+                ng-click="vm.submit()"
+                type="submit" id="send_test_email_form_confirm_button" class="btn btn-default"
+                ng-bind="'common.' + vm.currentAction || vm.currentAction | translate">
+            </button>
+        </div>
+    </form>
+</script>
+<script type="text/ng-template" id="/json_edit_modal_html">
+    <div class="modal-header">
+        <h3 class="modal-title"><span ng-bind="vm.action"></span> JSON</h3>
+    </div>
+    <form role="form">
+        <div class="modal-body">
+      <textarea class="form-control" ng-model="vm.JSONString" cols="30" rows="20" placeholder="{{'message.WRITE_YOUR_JSON' || 'Write your JSON' | translate}}">
+
+      </textarea>
+        </div>
+        <div class="modal-footer text-right">
+            <button class="btn" ng-click="$dismiss()"><i class="btn-icon glyphicon glyphicon-remove"></i><span translate="{{'common.CANCEL' | translate}}">Cancel</span>
+            </button>
+            <button ng-hide="vm.currentAction==='EXPORT'" class="btn btn-default" ng-click="vm.submit()"
+                    ng-bind="'message.' + vm.currentAction || vm.currentAction | translate"></button>
+        </div>
+    </form>
+</script>

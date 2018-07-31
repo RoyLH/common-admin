@@ -1,0 +1,126 @@
+<!--Common Design-->
+<div class="responsive">
+  <div class="panel panel-default user-form clearfix" ng-init="vm.initConfig();">
+    <div class="panel-body" id="admin_users_list">
+      <div class="sub-section">
+        <h3 class="text-left sub-ttile" translate="config.MENUS">Menus</h3>
+        <div class="sub-body">
+          <table class="table table-hover hidden-xs responsive" id="menu_list">
+            <thead>
+            <tr class="table-head table-sortable">
+              <th translate="config.NAME">Name</th>
+              <th class="cell-size-normal-lg" translate="config.STATE">State</th>
+              <th translate="config.MOBILE">Mobile</th>
+              <th translate="config.DEFAULT">Default</th>
+              <th translate="config.ADMIN">Admin</th>
+              <th translate="config.HORIZON">Horizon</th>
+              <th class="hidden-sm cell-size-action-lg" translate="config.ACTIONS">Actions</th>
+            </tr>
+            </thead>
+            <tbody data-as-sortable="vm.menusSortConfig" data-ng-model="vm.menus">
+            <tr ng-repeat-start="menu in vm.menus track by $index" ng-class="{'show-detail': showDetail}" data-as-sortable-item>
+              <td ng-bind="menu.name"></td>
+              <td ng-bind="menu.state"></td>
+              <td>
+                <a href="javascript:void(0);" ng-click="vm.menuOperation.changeVisible(menu)">
+                  <i class="glyphicon"
+                     ng-class="menu.mobile===true?'glyphicon-eye-open':'glyphicon-eye-close color-gray'"></i>
+                </a>
+              </td>
+              <td>
+                <a href="javascript:void(0);" ng-click="vm.menuOperation.changeDefault(menu);">
+                  <i class="glyphicon"
+                     ng-class="menu.isDefault===true?'glyphicon-check':'glyphicon-unchecked color-gray'"></i>
+                </a>
+              </td>
+              <td>
+                <a href="javascript:void(0);" ng-click="vm.menuOperation.changeRoles(menu,'admin')">
+                  <i class="glyphicon"
+                     ng-class="menu.roles.indexOf('admin')>-1?'glyphicon-eye-open':'glyphicon-eye-close color-gray'"></i>
+                </a>
+              </td>
+              <td>
+                <a href="javascript:void(0);"
+                   ng-click="vm.menuOperation.changeMenuPosition(menu);">
+                  <i class="glyphicon" ng-class="menu.topBar?'glyphicon-check':'glyphicon-unchecked color-gray'"></i>
+                </a>
+              </td>
+              <td class="hidden-sm">
+                <div>
+                  <a class="action-icon glyphicon glyphicon-trash"
+                     title="{{'common.DELETE' || 'Delete' | translate}}" ng-click="vm.menuOperation.deleteMenu(menu)"
+                     href="javascript:void(0)"></a>
+                  <a class="action-icon glyphicon glyphicon-edit" title="{{'common.UPDATE' || 'Update' | translate}}"
+                     ng-click="vm.menuOperation.showModal('update',menu);" href="javascript:void(0)"></a>
+                  <a href="javascript:void(0);" data-as-sortable-item-handle title="{{'config.DRAG_MENU' || 'Drag Menu' | translate}}"
+                     class="glyphicon glyphicon-menu-hamburger"></a>
+                </div>
+              </td>
+            </tr>
+            <tr ng-if="showDetail" class="table-row-detail" ng-repeat-end="">
+              <td colspan="3">
+                <div>
+                  <a class="action-icon glyphicon glyphicon-trash" title="{{'common.DELETE' || 'Delete' | translate}}"
+                     ng-click="vm.menuOperation.deleteMenu(menu)"
+                     href="javascript:void(0)"></a>
+                  <a class="action-icon glyphicon glyphicon-repeat" title="{{'common.RESET_TOKEN' || 'Reset' | translate}}"
+                     ng-click="vm.menuOperation.showModal('update',menu);" href="javascript:void(0)"></a>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <!--Responsive Web Design-->
+          <div class="row visible-xs responsive-user-list" ng-repeat="menu in vm.menus track by $index">
+            <div class="col-xs-5" ng-bind="menu.title"></div>
+            <div class="col-xs-7" ng-bind="menu.state"></div>
+          </div>
+          <div class="report-none-message sm ng-hide" ng-show="menus.length == 0" id="menus_none_message">No menu
+            Found
+          </div>
+        </div>
+        <div class="text-right">
+          <button class="btn btn-default" ng-click="vm.menuOperation.showModal('create')"><span
+            class="btn-icon glyphicon glyphicon-plus"></span><b translate="config.NEW_MENU">Create</b></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!---->
+<script type="text/ng-template" id="/menu_form">
+  <div class="modal-header">
+    <h3 class="modal-title" ng-bind="'config.' + currentAction.title || currentAction.title | translate"></h3>
+  </div>
+  <div class="modal-body">
+    <form role="form" name="addmenuForm" ng-submit="submitForm(addmenuForm)" novalidate>
+      <div class="form-group"
+           ng-class="{ 'has-error' : addmenuForm.menuName.$invalid && !addmenuForm.menuName.$pristine }">
+        <div class="input-group">
+          <span class="input-group-addon" translate="config.NEW_MENU_NAME">Name</span>
+          <input type="text" name="menuName" placeholder="{{'config.NEW_MENU_NAME' || 'Name' | translate}}" ng-model="menu.name"
+                 class="form-control" ng-minlength="2" ng-maxlength="20"
+                 required>
+        </div>
+        <p ng-show="addmenuForm.menuName.$error.minlength" class="help-block ng-hide" translate="error.MIN_LENGTH" translate-values="{ length: 2 }">Minimum Length is 5</p>
+        <p ng-show="addmenuForm.menuName.$error.maxlength" class="help-block ng-hide" translate="error.MAX_LENGTH" translate-values="{ length: 20 }">Maximum Length is 20</p>
+      </div>
+      <div class="form-group"
+           ng-class="{ 'has-error' : addmenuForm.menuState.$invalid && !addmenuForm.menuState.$pristine }">
+        <div class="input-group">
+          <span class="input-group-addon" translate="config.NEW_MENU_STATE">State</span>
+          <select ng-options="state.name as state.name for state in routeStates|filter:{abstract: '!'}" ng-model="menu.state" class="form-control" required></select>
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="modal-footer text-right">
+    <button class="btn" ng-click="$dismiss()"><i class="btn-icon glyphicon glyphicon-remove"></i><span translate="common.CANCEL">Cancel</span>
+    </button>
+    <button class="btn btn-default" ng-click="saveMenu()" ng-disabled="addmenuForm.$invalid"><i
+      class="btn-icon glyphicon glyphicon-ok"></i><span ng-bind="'common.' + currentAction.name | translate"></span>
+    </button>
+  </div>
+</script>
+

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @extends Error
  */
@@ -9,13 +7,11 @@ class ExtendableError extends Error {
             messageInfo;
         if (messageObj instanceof Object) {
             message = messageObj.code;
-            message = messageObj.messageInfo;
+            messageInfo = messageObj.messageInfo;
         } else {
             message = messageObj;
         }
-
         super(message);
-
         this.name = this.constructor.name;
         this.code = message;
         this.messageInfo = messageInfo;

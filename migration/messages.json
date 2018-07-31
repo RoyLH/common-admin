@@ -1,0 +1,407 @@
+[
+  {
+    "code": "102001",
+    "content": {
+      "en": "invalid param of request",
+      "cn": "请求参数无效"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "401002",
+    "content": {
+      "en": "the data of user update successfully",
+      "cn": "用户信息更新成功"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "401001",
+    "content": {
+      "en": "user sign up successfully",
+      "cn": "用户注册成功"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "403001",
+    "content": {
+      "en": "email have already send",
+      "cn": "邮件已发送"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "402004",
+    "content": {
+      "en": "data import success",
+      "cn": "数据导入成功"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "103003",
+    "content": {
+      "en": "be used token",
+      "cn": "被使用的token"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "103002",
+    "content": {
+      "en": "expired token",
+      "cn": "过期的token"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "103001",
+    "content": {
+      "en": "invalid token",
+      "cn": "无效的token"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "101004",
+    "content": {
+      "en": "inactive user",
+      "cn": "被禁的用户"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "101002",
+    "content": {
+      "en": "wrong password",
+      "cn": "密码错误"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "101001",
+    "content": {
+      "en": "unknow user",
+      "cn": "未知的用户"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "402003",
+    "content": {
+      "en": "delete successfully",
+      "cn": "删除成功"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "402002",
+    "content": {
+      "en": "update successfully",
+      "cn": "更新成功"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "402001",
+    "content": {
+      "en": "create data successfully",
+      "cn": "添加成功"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "CMSV_EMAIL_SEND_OK",
+    "content": {
+      "en": "Email notification is sent. Please follow the steps in the email.",
+      "cn": "邮件已发送，请根据邮件提示操作"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "CMSV_PASSWORD_ERR",
+    "content": {
+      "en": "Wrong password ",
+      "cn": "密码错误"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "CMSV_INVALID_TOKEN_ERR",
+    "content": {
+      "en": "Token is invalid.",
+      "cn": "Token 无效"
+    },
+    "clients": [],
+    "type": 0
+  },
+  {
+    "code": "CMSV_SHOW_SUCCESS_MESSAGE",
+    "content": {
+      "en": "{0}.",
+      "cn": "{0}"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "CMSV_INVALID_ID_ERR",
+    "content": {
+      "en": "The ID is invalid.",
+      "cn": "无效的ID"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "CMSV_DELETE_DATA_OK",
+    "content": {
+      "en": "{0} has been deleted.",
+      "cn": "删除{0}成功"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "404",
+    "content": {
+      "en": "The request resource cannot be found.",
+      "cn": "未找到请求的资源"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "CMSV_MONGOOSE_ERROR",
+    "content": {
+      "en": "{0}",
+      "cn": "{0}"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "CMSV_EXPIRED_TOKEN_ERR",
+    "content": {
+      "en": "Token is expired.",
+      "cn": "Token 过期"
+    },
+    "clients": [],
+    "type": 0
+  },
+  {
+    "code": "CMSV_ACCOUNT_ACTIVE_OK",
+    "content": {
+      "en": "{0} has been activated.",
+      "cn": "{0} 已经被激活"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "CMSV_NEW_PASSWORD_LOGIN",
+    "content": {
+      "en": "Password {0} successfully, please use new password to login.",
+      "cn": "{0}密码成功， 请用新密码登录"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "CMSV_INVALID_PARAM",
+    "content": {
+      "en": "The param is invalid.",
+      "cn": "参数无效"
+    },
+    "clients": [],
+    "type": 0
+  },
+  {
+    "code": "CMSV_CREATE_DATA_OK",
+    "content": {
+      "en": "{0} `{1}` has been added. {2}",
+      "cn": "{0} `{1}` 已经添加成功。{2}"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "200",
+    "content": {
+      "en": "The operation succeeds.",
+      "cn": "操作成功"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "CMSV_DELETE_DATA_ERR",
+    "content": {
+      "en": "{0} deletion failed.",
+      "cn": "删除{0}失败"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "403",
+    "content": {
+      "en": "User is not authorized",
+      "cn": "用户没有权限"
+    },
+    "clients": [],
+    "type": 1
+  },
+  {
+    "code": "500",
+    "content": {
+      "en": "The server is temporarily unavailable. Please try again later.",
+      "cn": "服务暂时不可用，请稍后再尝试"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "CMSV_DUPLICATE_ERR",
+    "content": {
+      "en": "The {0} has been used.",
+      "cn": "{0}已经被使用"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "CMSV_NEW_PASSWORD_ERR",
+    "content": {
+      "en": "New password is incorrect",
+      "cn": "新密码不正确"
+    },
+    "clients": [],
+    "type": 0
+  },
+  {
+    "code": "CMSV_UPDATE_DATA_OK",
+    "content": {
+      "en": "{0} `{1}` has been updated.",
+      "cn": "{0} `{1}`更新成功"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "CMSV_ACCOUNT_BLOCK_OK",
+    "content": {
+      "en": "{0} has been blocked.",
+      "cn": "{0} 已经被锁定"
+    },
+    "clients": [],
+    "type": 3
+  },
+  {
+    "code": "600",
+    "content": {
+      "en": "Session timed out, please login again.",
+      "cn": "Session 过期， 请再次登录"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "400",
+    "content": {
+      "en": "Invalid request",
+      "cn": "请求无效"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "CMSV_OLD_PASSWORD_ERR",
+    "content": {
+      "en": "Old password is incorrect",
+      "cn": "旧密码不正确"
+    },
+    "clients": [],
+    "type": 2
+  },
+  {
+    "code": "CMSV_EXPIRED_REFRESH_TOKEN_ERR",
+    "content": {
+      "en": "Token is expired.",
+      "cn": "Token 过期"
+    },
+    "clients": [],
+    "type": 0
+  },
+  {
+    "code": "CMSV_CONFIRM_DELETE",
+    "content": {
+      "en": "Are you sure delete `{0}`?",
+      "cn": "你确定要删除`{0}`？"
+    },
+    "clients": [],
+    "type": 0
+  },
+  {
+    "code": "CMSV_INVALID_REFRESH_TOKEN_ERR",
+    "content": {
+      "en": "Token is invalid.",
+      "cn": "Token 无效"
+    },
+    "clients": [],
+    "type": 0
+  },
+  {
+    "code": "CMSV_ACTIVE_TOKEN_INVALID",
+    "content": {
+      "en": "Token is invalid.",
+      "cn": "Token 无效"
+    },
+    "clients": [],
+    "type": 0
+  },
+  {
+    "code": "CMSV_NO_RECEIVED_RESPONSE",
+    "content": {
+      "en": "No received server data",
+      "cn": "没有收到服务器数据"
+    },
+    "clients": [],
+    "type": 1
+  },
+  {
+    "code": "CMSV_INACTIVE_USER",
+    "content": {
+      "en": "User is inactive",
+      "cn": "用户未激活状态"
+    },
+    "clients": [],
+    "type": 0
+  },
+  {
+    "code": "CMSV_NOT_FOUND_ERR",
+    "content": {
+      "en": "{0} is not found.",
+      "cn": "没有找到{0}"
+    },
+    "clients": [],
+    "type": 2
+  }
+]

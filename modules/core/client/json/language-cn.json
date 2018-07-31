@@ -1,0 +1,207 @@
+{
+    "common": {
+        "CREATE":"创建",
+        "UPDATE":"更新",
+        "EDIT":"编辑",
+        "DELETE":"删除",
+        "CANCEL":"取消",
+        "CONFIRM":"确认",
+        "RESET":"重置",
+        "SAVE":"保存",
+        "DOWNLOAD":"下载",
+        "SUBMIT":"提交",
+        "BLOCK":"停用",
+        "ACTIVATE":"激活",
+        "ERROR":"错误",
+        "WARNING":"警告",
+        "SUCCESS":"成功",
+        "LOG":"日志",
+        "INFO":"信息"
+    },
+    "error": {
+        "MIN_LENGTH":"最少输入{{length}}位字符",
+        "MAX_LENGTH":"最多输入{{length}}位字符",
+        "INVALID_EMAIL":"邮箱无效",
+        "ALPHABET":"只允许输入字母"
+    },
+    "core": {
+        "CHANGE_PASSWORD":"修改密码",
+        "FULL_SCREEN":"全屏",
+        "SMALL_SCREEN":"小屏",
+        "LOGIN":"登录",
+        "LOGOUT":"登出"
+    },
+    "config": {
+        "MENUS":"菜单",
+        "NAME":"菜单项",
+        "STATE":"状态",
+        "MOBILE":"移动端",
+        "DEFAULT":"默认项",
+        "ADMIN":"管理员",
+        "HORIZON":"水平",
+        "ACTIONS":"操作",
+        "NEW_MENU":"新建菜单",
+        "UPDATE_MENU":"更新菜单",
+        "NEW_MENU_NAME": "菜单名",
+        "NEW_MENU_STATE": "状态名",
+        "DRAG_MENU": "拖拽菜单"
+    },
+    "client": {
+        "TITLE":"客户端列表",
+        "NAME": "客户端",
+        "ID": "客户端ID",
+        "SECRET": "客户端秘钥",
+        "URL": "客户端URL",
+        "STATUS": "状态",
+        "ACTIONS": "操作",
+        "NEW_CLIENT": "新建客户端",
+        "EDIT_CLIENT": "编辑客户端",
+        "RESET_TOKEN":"重置 Token"
+    },
+    "feedback": {
+        "TITLE":"反馈列表",
+        "STATUS":"状态",
+        "NAME":"反馈名称",
+        "LEVEL":"级别",
+        "NOTES":"记录",
+        "CLIENT":"客户端",
+        "CREATED":"时间",
+        "ACTIONS":"操作",
+        "ALL_STATUS":"所有状态"
+    },
+    "file": {
+        "TITLE":"文件列表",
+        "BACK":"后退",
+        "FORWARD":"前进",
+        "UPLOAD":"上传",
+        "NEW_FOLDER":"新建文件夹",
+        "REMOVE_CHECKED":"删除所选文件",
+        "DOWNLOAD_CHECKED":"下载所选文件",
+        "TEST":"测试",
+        "TYPE":"类型",
+        "NAME":"文件名",
+        "CREATED":"上传时间",
+        "SIZE":"文件大小",
+        "ACTIONS":"操作",
+        "FOLDER_NAME":"文件夹名称"
+    },
+    "cache": {
+        "TITLE":"缓存管理",
+        "KEY":"键",
+        "ACTIONS":"操作"
+    },
+    "message":{
+        "TITLE":"消息管理",
+        "NEW_MESSAGE":"添加消息",
+        "IMPORT_JSON":"导入JSON文件",
+        "EXPORT_JSON":"导出JSON文件",
+        "CODE":"代码",
+        "CLIENTS":"客户端",
+        "English":"英文",
+        "Chinese":"中文",
+        "TYPE":"消息类型",
+        "ACTIONS":"操作",
+        "SELECT_TYPE":"选择消息类型",
+        "WRITE_YOUR_JSON":"JSON 内容",
+        "IMPORT":"导入",
+        "EXPORT":"导出"
+    },
+    "email":{
+        "TITLE":"邮件模板管理",
+        "NEW_TEMPLATE":"新建模板",
+        "EXPORT":"导出模板",
+        "EMAIL_TITLE":"主题",
+        "EMAIL_NAME":"发件人",
+        "EMAIL_TARGET":"收件人",
+        "EMAIL_SUBJECT":"分类",
+        "EMAIL_CONTENT":"内容",
+        "NO_TEMPLATE":"还没有模板",
+        "TEST":"测试模板",
+        "WRITE_YOUR_JSON":"JSON 内容",
+        "SEND_TEST_EMAIL":"发送测试邮件",
+        "displayName":"姓名",
+        "email":"邮箱地址",
+        "SEND":"发送"
+    },
+    "auth": {
+        "LOG_IN":"登录",
+        "EMAIL":"邮箱",
+        "PASSWORD":"密码",
+        "OLD_PASSWORD":"旧密码",
+        "NEW_PASSWORD":"新密码",
+        "CONFIRM_PASSWORD":"确认密码"
+    },
+    "password": {
+        "TITLE":"修改密码",
+        "OLD_PASSWORD":"旧密码",
+        "NEW_PASSWORD":"新密码",
+        "CONFIRM_PASSWORD":"确认密码",
+        "DIFFERENT_OLD":"不能和旧密码相同",
+        "SAME_ABOVE":"和上述新密码不同"
+    },
+    "home": {
+        "TITLE": "欢迎来到Common Service!",
+        "HOME": "主页",
+        "DASHBOARD": "主菜单",
+        "SUB_TITLE": "Common Services V2.0",
+        "USAGE": "使用说明",
+        "TODO": "开始",
+        "BASED_ON": "基于 MEAN.JS V0.5.0"
+    },
+    "not-found": {
+        "TITLE": "您看起来迷失了",
+        "HOME": "主页"
+    },
+    "bad-request": {
+        "TITLE":"错误的请求",
+        "HOME":"主页"
+    },
+    "no-permission": {
+        "TITLE": "您没有权限",
+        "HOME":"主页"
+    },
+    "localization": {
+        "TITLE": "多语言管理",
+        "LANGUAGE_ANCHORS":"语言键",
+        "LANGUAGE": "语种",
+        "NEW_ANCHOR": "添加语言键",
+        "NEW_LANGUAGE":"添加语种",
+        "IMPORT":"导入",
+        "EXPORT":"导出",
+        "NAME":"语种名",
+        "KEY":"键",
+        "CLIENTS": "客户端",
+        "English":"英文",
+        "Chinese":"中文",
+        "ACTION":"操作",
+        "CODE":"代码"
+    },
+    "staff": {
+        "TITLE":"管理员列表",
+        "EMAIL":"邮箱",
+        "DISPLAY_NAME":"姓名",
+        "STATUS":"状态",
+        "ADMIN":"管理员",
+        "ACTIONS":"操作",
+        "NEW_STAFF":"新建管理员",
+        "FIRST_NAME":"名",
+        "LAST_NAME":"姓",
+        "UPDATE_STAFF":"修改管理员信息",
+        "REASON":"原因"
+    },
+    "user": {
+        "TITLE":"用户列表",
+        "EMAIL":"邮箱",
+        "DISPLAY_NAME":"姓名",
+        "STATUS":"状态",
+        "ACTIONS":"操作",
+        "SEARCH_USER":"搜索用户",
+        "NEW_USER":"新建用户",
+        "FIRST_NAME":"名",
+        "MIDDLE_NAME":"中间名（可选）",
+        "LAST_NAME":"姓",
+        "UPDATE_USER":"修改用户信息",
+        "REASON":"原因",
+        "NO_USER":"没有用户"
+    }
+}

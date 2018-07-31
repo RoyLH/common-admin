@@ -1,0 +1,105 @@
+<div class="main-content" ng-class="{'full-screen':vm.fullScreen}" ng-init="vm.init()">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="main_menu">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle pull-left collapsed" data-toggle="collapse"
+                        ng-click="isMenuCollapsed = !isMenuCollapsed;$parent.isUserMenuCollapsed = false"
+                        aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <button class="navbar-toggle pull-right collapsed"
+                        ng-click="$parent.isUserMenuCollapsed = !$parent.isUserMenuCollapsed;isMenuCollapsed = false"
+                        aria-expanded="false">
+                    <i class="glyphicon glyphicon-user collapse-icon"></i>
+                </button>
+                <a class="navbar-brand hidden-xs" href="javascript:void(0);" ng-click="vm.goDefaultMenu();">
+                    <img ng-attr-alt="{{vm.mainTitle}}" class="main-logo" src="/modules/core/client/img/logo.png"/>
+                    <span ng-bind="vm.mainTitle" class="visible-lg-inline main-title"></span>
+                </a>
+                <div class="navbar-text visible-xs-block text-uppercase text-center current-title"
+                     ng-bind="vm.mainTitle"></div>
+            </div>
+            <div id="main_nav_collapse" uib-collapse="!isMenuCollapsed" class="collapse">
+                <ul class="nav navbar-nav visible-xs" role="menu">
+                    <li ui-sref-active="active"
+                        ng-click="$parent.isMenuCollapsed = !$parent.isMenuCollapsed"
+                        ng-repeat="menu in vm.menus|filter:{mobile: true} track by $index">
+                        <a id="{{'sm_main_menu_'+menu.state}}"
+                           ui-sref="{{menu.state}}"
+                           ng-bind="menu.name">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="main_nav_user_collapse" uib-collapse="!isUserMenuCollapsed" class="collapse">
+                <ul class="nav navbar-nav visible-xs" role="menu">
+                    <li ng-click="$parent.isUserMenuCollapsed = !$parent.isUserMenuCollapsed" ui-sref-active="active">
+                        <a ui-sref="dashboard.password"><i class="glyphicon glyphicon-wrench"></i> {{'core.CHANGE_PASSWORD' || 'Change Password' | translate}}</a>
+                    </li>
+                    <li ng-click="vm.changeScreenStatus()">
+                        <a href="javascript:void(0)">
+                            <i ng-class="{'glyphicon glyphicon-resize-full':!vm.fullScreen, 'glyphicon glyphicon-resize-small':vm.fullScreen}"></i> <span ng-bind="!vm.fullScreen?'core.FULL_SCREEN':'core.SMALL_SCREEN' | translate"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/app/auth/signout" target="_self"><i class="glyphicon glyphicon-log-out"></i> {{'core.LOGOUT' || 'Logout' | translate}}</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="nav navbar-nav navbar-right hidden-xs">
+                <li>
+                    <ul class="nav navbar-nav hidden-xs" role="menu">
+                        <li ui-sref-active="active"
+                            ng-click="$parent.isMenuCollapsed = !$parent.isMenuCollapsed"
+                            ng-repeat="menu in vm.menus|filter:{topBar: true} track by $index">
+                            <a id="{{'main_menu_horizon_'+menu.state}}"
+                               ui-sref="{{menu.state}}"
+                               ng-bind="menu.name">
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li role="presentation" class="dropdown" uib-dropdown>
+                    <a class="dropdown-toggle" uib-dropdown-toggle href="javascript:void(0);" role="button"
+                       aria-expanded="false">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span ng-bind="vm.auth.displayName"></span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-click="$parent.isUserMenuCollapsed = !$parent.isUserMenuCollapsed"
+                            ui-sref-active="active">
+                            <a ui-sref="dashboard.password"><i class="glyphicon glyphicon-wrench"></i> {{'core.CHANGE_PASSWORD' || 'Change Password' | translate}}</a>
+                        </li>
+                        <li ng-click="vm.changeScreenStatus()">
+                            <a href="javascript:void(0)">
+                                <i ng-class="{'glyphicon glyphicon-resize-full':!vm.fullScreen, 'glyphicon glyphicon-resize-small':vm.fullScreen}"></i> <span ng-bind="!vm.fullScreen?'core.FULL_SCREEN' || 'Full Screen' :'core.SMALL_SCREEN' || 'Small Screen' | translate"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/app/auth/signout" target="_self"><i class="glyphicon glyphicon-log-out"></i> {{'core.LOGOUT' || 'Logout' | translate}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container" id="main_container" ng-click="isMenuCollapsed = false;$parent.isUserMenuCollapsed = false">
+        <div id="sp-nav" ng-if="vm.verticalMenu" scroll class="col-sm-3 col-md-2 sidebar" id="main_sidebar">
+            <ul class="nav nav-sidebar common hidden-xs row">
+                <li ng-repeat="menu in vm.menus | orderBy:'order' track by $index" ng-if="!menu.topBar" ui-sref-active="active">
+                    <a id="{{'main_menu_'+menu.state}}"
+                       ui-sref="{{menu.state}}"
+                       ng-bind="menu.name">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main" id="main_content" ng-class="vm.verticalMenu?'col-sm-9 col-md-10':'container'">
+            <div class="row content-view" ui-view>
+            </div>
+        </div>
+    </div>
+</div>

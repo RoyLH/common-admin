@@ -1,0 +1,41 @@
+.login-form {
+  max-width: 500px;
+  margin: 50px auto;
+  .sit-logo {
+    padding: 5px 0;
+    img {
+      max-height: 60px;
+      max-width: 100%;
+    }
+  }
+
+  .login-actions {
+    a:hover {
+      text-decoration: none;
+    }
+  }
+
+  .public-login {
+    text-align: center;
+    img {
+      max-width: 30px;
+    }
+
+    font-style: italic;
+  }
+
+  .forgot-password::before {
+    content: '?';
+    font-weight: 700;
+    padding-right: 5px;
+  }
+}
+.active-user{
+  width:90%;
+  max-width:500px;
+  margin:150px auto 0;
+  .panel-body{
+    text-align: center;
+    padding:3em ;
+  }
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "target": "New User",
+    "subject": "[Mean Common Backend] User Created Successfully",
+    "name": "Create Staff",
+    "title": "create-staff",
+    "body": "<p> Dear <b>{{{displayName}}}</b>:</p><p> This is an auto generated mail to notify you that user account has been created successfully.<br/><br/>    Following are the user details:</p><table style=\"width: 100%;\" class=\"table\">    <tbody>    <tr>        <td style=\"text-align: right;\">Email ID: </td>        <td>{{{email}}}</td>    </tr>    <tr>        <td style=\"text-align: right;\">Display Name: </td>        <td> {{{displayName}}}</td>    </tr>    <tr>        <td style=\"text-align: right;\">Password: </td>        <td>{{{password}}}</td>    </tr>    </tbody></table><p><br/> Thanks,<br/>CommonService<br/></p><p>Note: This is an automatically generated email, please do not reply.</p>"
+  },
+  {
+    "target": "User",
+    "subject": "[Mean Common Backend] Password Changed Successfully",
+    "name": "Change Password",
+    "title": "change-password",
+    "body": "<p> Dear <b>{{{displayName}}}</b>:</p> <p> This is an auto generated mail to notify you that password has been changed successfully. <br/> Following are the user details:</p> <table style=\"width: 100%;\"> <tbody> <tr> <td style=\"text-align: right;\">Email:&nbsp; </td> <td>{{{email}}}</td> </tr> <tr> <td style=\"text-align: right;\">Display Name:&nbsp; </td> <td> {{{displayName}}}</td> </tr> </tbody> </table> <p><br/> Thanks,<br/>CommonService<br/></p> <p> Note: This is an automatically generated email, please do not reply.</p>"
+  },
+  {
+    "target": "user",
+    "subject": "[Mean Common Backend] User Create Confirm",
+    "name": "create user confirm",
+    "title": "Create-User-Confirm",
+    "body": "<p>Dear <b>{{{email}}}</b>:</p> <p>Click <a href=\"{{{activeURL}}}{{{activeToken}}}\">here</a> to active your account.</p> <p><br/> Thanks,<br>commonServices<br></p> <p>Note: This is an automatically generated email, please do not reply.</p>"
+  },
+  {
+    "target": "user",
+    "subject": "[Mean Common Backend] user active",
+    "name": "user active",
+    "title": "User-Active",
+    "body": "<p>Dear <b>{{{email}}}</b>:</p> <p>You're receiving this email because your account has been active.</p><p> Thanks<br>commonServices<br></p><p><br/></p><p><span>Note: This is an automatically generated email, please do not reply.</span><br/></p>"
+  },
+  {
+    "target": "User",
+    "subject": "User",
+    "name": "Create User",
+    "title": "create-user",
+    "body": "<p> Dear <b>{{{displayName}}}</b>:</p><p> This is an auto generated mail to notify you that user account has been created successfully.<br/><br/></p><p> Thanks,<br/><!--StartFragment--><span style=\"font-size: 16px;float: none;\">commonServices</span><br/></p><p>Note: This is an automatically generated email, please do not reply.</p>"
+  },
+  {
+    "target": "User",
+    "subject": "retrieve-password",
+    "name": "Forgot password",
+    "title": "retrieve-password",
+    "body": "<p>Dear<span class=\"\\&#34;Apple-converted-space\\&#34;\"> <b>{{{displayName}}}</b>:</span></p><p>We have received the request that you want to reset your password, Click the <a href=\"{{link}}\" target=\"\" style=\"background-color: transparent;\">here</a> reset your password.</p><p><br/>Thanks,<br/>Common-service</p><p>Note: This is an automatically generated email, please do not reply.</p>"
+  },
+  {
+    "target": "User",
+    "subject": "User",
+    "name": "Update user confirm",
+    "title": "update-user-confirm",
+    "body": "<p style=\"font-size: 16px;\">Dear <b>{{{displayName}}}</b>:</p><p style=\"font-size: 16px;\">Click <a href=\"{{{link}}}\" style=\"background-color: transparent;\">here</a> to activate your account.</p><p style=\"font-size: 16px;\"><br/>Thanks,<br/>WinningFotos<br/></p><!--EndFragment--><p><br/></p><p><br/></p>"
+  },
+  {
+    "target": "Staff",
+    "subject": "Staff",
+    "name": "Reset Password",
+    "title": "reset-password",
+    "body": "<p style=\"font-size: 16px;\">Dear <b>{{{displayName}}}</b>:</p><p style=\"font-size: 16px;\"><br/></p><p style=\"font-size: 16px;\">This is an auto generated mail to notify you that your password has been reset successfully.<br/><br/>Following are the user details:</p><p style=\"font-size: 16px;\"><br/></p><table style=\"font-size: 16px;width: 1107px;\"><tbody><tr><td style=\"text-align: right;\">Email: </td><td>{{{email}}}</td></tr><tr><td style=\"text-align: right;\">Display Name: </td><td>{{{displayName}}}</td></tr><tr><td style=\"text-align: right;\">Password: </td><td>{{{password}}}</td></tr></tbody></table><p style=\"font-size: 16px;\"><br/>Thanks,<br/>CommonService<br/></p><p style=\"font-size: 16px;\"><br/></p><p style=\"font-size: 16px;\">Note: This is an automatically generated email, please do not reply.</p>"
+  }
+]

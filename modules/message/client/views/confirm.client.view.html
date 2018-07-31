@@ -1,0 +1,12 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    <i class="glyphicon glyphicon-alert title-icon"></i>{{'common.CONFIRM' || 'Confirm' | translate}}
+  </h4>
+</div>
+<div class="modal-body text-warning">
+  <p ng-bind="vm.message"></p>
+</div>
+<div class="modal-footer confirm">
+  <button class="btn" ng-click="$close('no')">{{'common.CANCEL' || 'Cancel' | translate}}</button>
+  <button class="btn btn-default" autofocus ng-click="$close('yes');">{{'common.CONFIRM' || 'Confirm' | translate}}</button>
+</div>

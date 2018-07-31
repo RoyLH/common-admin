@@ -1,0 +1,169 @@
+{
+    "requests": {
+        "user": {
+            "super": [
+                {
+                    "password": "default",
+                    "email": "info@automatedtesting.com",
+                    "displayName": "Sharlto Copley",
+                    "firstName": "Sharlto",
+                    "middleName": "",
+                    "lastName": "Copley",
+                    "status": 1,
+                    "roles": [
+                        "superuser"
+                    ],
+                    "provider": "local"
+                }
+            ],
+            "admin": [
+                {
+                    "password": "default",
+                    "email": "admin1@automatedtesting.com",
+                    "displayName": "Admin Lineage",
+                    "firstName": "Admin",
+                    "middleName": "",
+                    "lastName": "Lineage",
+                    "status": 1,
+                    "role": [
+                        "admin"
+                    ],
+                    "provider": "local",
+                    "profileImageURL": "/modules/tool/tests/images/testImage.jpg"
+                },
+                {
+                    "password": "default",
+                    "email": "admin2@automatedtesting.com",
+                    "displayName": "Admin Lineage",
+                    "firstName": "Admin",
+                    "middleName": "",
+                    "lastName": "Lineage",
+                    "status": 1,
+                    "role": [
+                        "admin"
+                    ],
+                    "provider": "local",
+                    "profileImageURL": "/img/profile/default-profile-image.png"
+                }
+            ],
+            "user": [
+                {
+                    "password": "default",
+                    "email": "user@automatedtesting.com",
+                    "displayName": "User Automated",
+                    "firstName": "User",
+                    "middleName": "",
+                    "lastName": "Automated",
+                    "status": 1,
+                    "roles": [
+                        "user"
+                    ],
+                    "provider": "local"
+                },
+                {
+                    "password": "default",
+                    "email": "user1@automatedtesting.com",
+                    "displayName": "User Lineage",
+                    "firstName": "User",
+                    "middleName": "",
+                    "lastName": "Lineage",
+                    "status": 1,
+                    "roles": [
+                        "user"
+                    ],
+                    "provider": "local"
+                },
+                {
+                    "password": "default",
+                    "email": "user2@automatedtesting.com",
+                    "displayName": "User Lineage",
+                    "firstName": "User",
+                    "middleName": "",
+                    "lastName": "Lineage",
+                    "status": 1,
+                    "roles": [
+                        "user"
+                    ],
+                    "provider": "local"
+                }
+            ]
+        },
+        "clients": [
+            {
+                "clientName": "clienttest",
+                "clientID": "clienttestid",
+                "clientSecret": "clienttestsecret"
+            }
+        ],
+        "emailTemplates": [
+            {
+                "textBody": "To CPA:\n\n\n\n\nJudges list in the showcase {{showcaseName}}:\n\nDownload Link:{{filename}} [{{csvFileURL}}]\n\n\n\n\n\n\n\nWF,\n\n{{date}}",
+                "name": "judge-info-to-CPA",
+                "title": "judge-info-to-CPA",
+                "target": "User",
+                "subject": "The judges information along the showcase",
+                "updateTime": "2017-06-28T02:18:55.521+0000",
+                "createTime": "2017-05-23T03:23:45.391+0000",
+                "body": "<p>To CPA:</p><p><br/></p><blockquote><blockquote><p>Judges list in the showcase {{showcaseName}}:</p></blockquote></blockquote><blockquote><blockquote><p>Download Link: <a href=\"{{csvFileURL}}\" target=\"\">{{filename}}</a></p></blockquote></blockquote><p><br/></p><p><br/></p><p>WF,</p><p>{{date}}</p>"
+            }
+        ],
+        "sysConfigs": [
+            {
+                "name": "sys-menu",
+                "option": [
+                    {
+                        "state": "dashboard.config",
+                        "name": "Config",
+                        "mobile": false,
+                        "roles": [
+                            "superuser"
+                        ],
+                        "order": 0
+                    },
+                    {
+                        "state": "dashboard.message",
+                        "name": "Message",
+                        "mobile": false,
+                        "roles": [
+                            "superuser",
+                            "admin"
+                        ],
+                        "order": 1
+                    },
+                    {
+                        "state": "dashboard.client",
+                        "name": "Client",
+                        "mobile": false,
+                        "roles": [
+                            "superuser"
+                        ],
+                        "order": 2
+                    },
+                    {
+                        "state": "dashboard.feedback",
+                        "name": "Feedback",
+                        "mobile": false,
+                        "roles": [
+                            "superuser",
+                            "admin"
+                        ],
+                        "order": 3
+                    }
+                ]
+            },
+            {
+                "name": "languages",
+                "option": [
+                    {
+                        "name": "English",
+                        "code": "en"
+                    },
+                    {
+                        "name": "Chinese",
+                        "code": "cn"
+                    }
+                ]
+            }
+        ]
+    }
+}
