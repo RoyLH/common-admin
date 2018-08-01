@@ -16,7 +16,7 @@ module.exports = {
     host: process.env.HOST || '0.0.0.0',
     db: {
         promise: global.Promise,
-        uri: process.env.DB_CONFIG_URI || 'mongodb://user:123gogogo@168.63.138.105:27758/commonservice-dev',
+        uri: process.env.DB_CONFIG_URI || 'mongodb://127.0.0.1:27017/mean-common-backend',
         debug: process.env.MONGODB_DEBUG || false // Enable mongoose debug mode
     },
     sessionCookie: {
