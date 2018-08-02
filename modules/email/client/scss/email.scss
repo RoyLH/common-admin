@@ -1,0 +1,155 @@
+.info-panel{
+  padding: 10px 20px;
+  .raw{
+    margin: 10px 0;
+    line-height:34px;
+  }
+  .info-item-label{
+    text-align: right;
+  }
+}
+.management {
+  h3 {
+    font-size: 1em;
+    margin: 0 0 10px;
+    text-align: left;
+  }
+
+  .management-list {
+    width: 26%;
+    float: left;
+    border-right: 1px solid #ddd;
+
+    .list-group-item {
+      cursor: pointer;
+      background: #F1F1F1;
+      border-style: solid;
+      border-color: #ddd;
+      border-width: 1px 0;
+      border-radius: 0;
+
+      &.block {
+        opacity: .5;
+
+        .fa {
+          display: none;
+        }
+      }
+
+      &.active {
+        background: #FFFFFF;
+        text-shadow: none;
+        &:hover, &:focus {
+          background: #FFFFFF;
+          border-color: #c5c5c5;
+          .list-group-item-heading {
+            color: #000000;
+            .preview {
+              display: block;
+            }
+          }
+          .list-group-item-text {
+            color: #5B3256;
+          }
+        }
+      }
+
+      &:hover, &:focus {
+        text-decoration: none;
+        background-color: #F1F1F1;
+      }
+
+      .list-group-item-heading {
+        color: #000000;
+        .program-name {
+          float: left;
+          padding: 0;
+        }
+        .preview {
+          width: 35%;
+          padding: 0;
+          float: right;
+          display: none;
+          .fa-chevron-right {
+            font-size: 12px;
+          }
+        }
+        word-wrap: break-word;
+      }
+
+      .list-group-item-text {
+        color: #333;
+        word-wrap: break-word;
+      }
+
+      &:hover {
+        .list-group-item-heading {
+          .preview {
+            display: inline-block;
+          }
+        }
+      }
+    }
+
+    .list-group-item:first-child {
+      border-top: 1px solid #c5c5c5;
+    }
+
+    .input-group {
+      .input-group-addon {
+        border-radius: 0;
+      }
+      .form-control:last-child {
+        border-radius: 0;
+      }
+      &:first-child {
+        .input-group-addon {
+          border-top-left-radius: 4px;
+        }
+        .form-control:last-child {
+          border-top-right-radius: 4px;
+        }
+      }
+    }
+
+    .actions {
+      padding: 10px 15px;
+      text-align: center;
+
+      .search-text {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .management-details {
+    width: 74%;
+    float: left;
+    border-left: 1px solid #ddd;
+  }
+
+  .management-content {
+    .sub-title {
+      padding: 30px 0;
+      border-bottom: 1px #ddd dashed;
+      list-style: none;
+      .name {
+        float: left;
+      }
+      button {
+        float: right;
+        margin-bottom: 10px;
+      }
+      .annotation {
+        display: inline-block;
+      }
+      .filter-program-form {
+        padding: 15px 0;
+      }
+    }
+  }
+
+  .pagination {
+    margin: 20px 0 !important;
+  }
+}

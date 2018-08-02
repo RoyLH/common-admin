@@ -1,0 +1,166 @@
+<!--Common Design-->
+<div class="responsive">
+  <div class="panel panel-default user-form clearfix" ng-init="refresh()">
+    <div class="panel-heading hidden-xs">
+      <div class="panel-title">
+        <h2 translate="client.TITLE">TITLE LIST</h2></div>
+    </div>
+
+    <div class="panel-body" id="admin_users_list">
+      <table class="table table-hover hidden-xs responsive" id="client_list">
+        <thead>
+        <tr class="table-head table-sortable">
+          <th class="client-name" sort order="'clinetName'" target="'clients'">
+            <span translate="client.NAME">Client Name</span>
+          </th>
+          <th class="client-id" sort order="'clientID'" target="'clients'">
+              <span translate="client.ID">Client ID</span>
+          </th>
+          <th class="client-secret">
+              <span translate="client.SECRET">Client Secret</span>
+          </th>
+          <th class="client-url" sort order="'clientUrl'" target="'clients'">
+              <span translate="client.URL">URL</span>
+          </th>
+          <th class="client-status" sort order="'status'" target="'clients'">
+              <span translate="client.STATUS">Status</span>
+          </th>
+          <th class="hidden-sm">
+              <span translate="client.ACTIONS">Actions</span>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat-start="client in clients | orderBy: selectItemGroup.clients:reverseGroup.clients" ng-class="{'show-detail': showDetail}">
+          <td ng-bind="client.clientName"></td>
+          <td ng-bind="client.clientID"></td>
+          <td ng-bind="client.clientSecret"></td>
+          <td ng-bind="client.clientUrl"></td>
+          <td ng-bind="client.status=='1'? 'Active':'Blocked' "></td>
+          <td class="hidden-sm">
+            <div>
+              <a class="action-icon glyphicon glyphicon-edit" title="{{'common.EDIT' || 'Edit' | translate}}"
+                 ng-if="client.status === 1"
+                 ng-click="handleClient(client, 'edit');"
+                 href="javascript:void(0)"></a>
+
+              <a class="action-icon glyphicon glyphicon-trash" title="{{'common.DELETE' || 'Delete' | translate}}"
+                 ng-if="client.status !== 1"
+                 ng-click="deleteClient(client)"
+                 href="javascript:void(0)"></a>
+
+              <a class="action-icon glyphicon glyphicon-ban-circle" title="{{'common.BLOCK' || 'Block' | translate}}"
+                 ng-if="client.status === 1"
+                 ng-click="handleClient(client,'deactivate');"
+                 href="javascript:void(0)"></a>
+              <a class="action-icon glyphicon glyphicon-plus" title="{{'common.ACTIVATE' || 'Activate' | translate}}"
+                 ng-if="client.status === -1"
+                 ng-click="handleClient(client,'reactivate');"
+                 href="javascript:void(0)"></a>
+
+              <a class="action-icon glyphicon glyphicon-repeat" title="{{'client.RESET_TOKEN' || 'Reset Token' | translate}}"
+                 ng-if="client.status === 1"
+                 ng-click="handleClient(client,'refresh');"
+                 href="javascript:void(0)"></a>
+            </div>
+          </td>
+        </tr>
+        <tr ng-if="showDetail" class="table-row-detail" ng-repeat-end="">
+          <td colspan="3">
+            <div>
+              <a class="action-icon glyphicon glyphicon-edit" title="{{'common.EDIT' || 'Edit' | translate}}"
+                 ng-if="client.status === 1"
+                 ng-click="editClient(client);"
+                 href="javascript:void(0)"></a>
+
+              <a class="action-icon glyphicon glyphicon-trash" title="{{'common.DELETE' || 'Delete' | translate}}"
+                 ng-if="client.status !== 1"
+                 ng-click="deleteClient(client)"
+                 href="javascript:void(0)"></a>
+
+              <a class="action-icon glyphicon glyphicon-ban-circle" title="{{'common.BLOCK' || 'Block' | translate}}"
+                 ng-if="client.status === 1"
+                 ng-click="handleClient(client,'deactivate');"
+                 href="javascript:void(0)"></a>
+              <a class="action-icon glyphicon glyphicon-plus" title="{{'common.ACTIVATE' || 'Activate' | translate}}"
+                 ng-if="client.status == -1"
+                 ng-click="handleClient(client,'reactivate');"
+                 href="javascript:void(0)"></a>
+
+              <a class="action-icon glyphicon glyphicon-repeat" title="{{'client.RESET_TOKEN' || 'Reset Token' | translate}}"
+                 ng-if="client.status === 1"
+                 ng-click="handleClient(client,'refresh');"
+                 href="javascript:void(0)"></a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!--Responsive Web Design-->
+      <div class="row visible-xs responsive-user-list" ng-repeat="client in clients">
+        <div class="col-xs-5" ng-bind="client.clientName"></div>
+        <div class="col-xs-7" ng-bind="client.clientID"></div>
+      </div>
+
+      <div class="report-none-message sm ng-hide" ng-show="clients.length == 0" id="clients_none_message">No Client
+        Found
+      </div>
+    </div>
+
+    <div class="panel-footer">
+      <button id="admin_client_add_button" class="btn btn-default" ng-click="addClient()"><span
+        class="btn-icon glyphicon glyphicon-plus"></span><b translate="client.NEW_CLIENT">New Client</b></button>
+    </div>
+
+  </div>
+</div>
+
+<script type="text/ng-template" id="/client_modal_form">
+  <div class="modal-header bg-success">
+      <h3 class="modal-title" ng-if="task==='add'" translate="client.NEW_CLIENT">New Client</h3>
+      <h3 class="modal-title" ng-if="task!=='add'" translate="client.EDIT_CLIENT">Edit Client</h3>
+  </div>
+  <div class="modal-body">
+    <form role="form" name="clientModalForm" ng-submit="submitForm(clientModalForm)" novalidate>
+      <div class="form-group floating-label-wrapper"
+           ng-class="{ 'has-error' : clientModalForm.clientName.$invalid && !clientModalForm.clientName.$pristine }">
+        <div class="input-group" >
+          <span class="input-group-addon" translate="client.NAME">Client Name</span>
+          <input type="text" name="clientName" placeholder="{{'client.NAME' || 'Name' | translate}}" ng-model="client.clientName"
+                 id="display_name" class="form-control" ng-minlength="5" ng-maxlength="20" required>
+        </div>
+        <p ng-show="clientModalForm.clientName.$error.minlength" class="help-block ng-hide" translate="error.MIN_LENGTH" translate-values="{ length: 5 }">Minimum Length is 5</p>
+        <p ng-show="clientModalForm.clientName.$error.maxlength" class="help-block ng-hide" translate="error.MAX_LENGTH" translate-values="{ length: 20 }">Maximum Length is 20</p>
+      </div>
+
+      <div class="form-group floating-label-wrapper"
+           ng-class="{ 'has-error' : clientModalForm.clientID.$invalid && !clientModalForm.clientID.$pristine }">
+        <div class="input-group">
+          <span class="input-group-addon" translate="client.ID">Client ID</span>
+          <input type="text" name="clientID" placeholder="{{'client.ID' || 'Client ID' | translate}}" ng-model="client.clientID"
+                 id="client_name" class="form-control" ng-minlength="5" ng-maxlength="20" required>
+        </div>
+        <p ng-show="clientModalForm.clientID.$error.minlength" class="help-block ng-hide" translate="error.MIN_LENGTH" translate-values="{ length: 5 }">Minimum Length is 5</p>
+        <p ng-show="clientModalForm.clientID.$error.maxlength" class="help-block ng-hide" translate="error.MAX_LENGTH" translate-values="{ length: 20 }">Maximum Length is 20</p>
+      </div>
+
+      <div class="form-group floating-label-wrapper"
+           ng-class="{ 'has-error' : clientModalForm.clientUrl.$invalid && !clientModalForm.clientUrl.$pristine }">
+        <div class="input-group">
+          <span class="input-group-addon" translate="client.URL">URL</span>
+          <input type="text" name="clientUrl" placeholder="{{'client.URL' || 'URL' | translate}}" ng-model="client.clientUrl"
+                 id="client_url" class="form-control">
+        </div>
+      </div>
+    </form>
+
+  </div>
+  <div class="modal-footer text-right">
+    <button class="btn" ng-click="$dismiss()"><i class="btn-icon glyphicon glyphicon-remove"></i><span translate="common.CANCEL">Cancel</span>
+    </button>
+    <button class="btn btn-default" ng-click="create()" ng-disabled="clientModalForm.$invalid"><i
+      class="btn-icon glyphicon glyphicon-ok"></i><span translate="common.SAVE">Save</span>
+    </button>
+  </div>
+</script>
