@@ -9,30 +9,35 @@ const path = require('path'),
     dbUtils = require('./migUtils');
 
 const addSeedUser = done => {
-    const seedUsers = [{
-        'password': 'default',
-        'email': 'super@163.com',
-        'displayName': 'super user',
-        'firstName': 'super',
-        'middleName': '',
-        'lastName': 'user',
-        'status': 1,
-        'roles': [
-            'superuser'
-        ]
-    }, {
-        'password': 'default',
-        'email': 'admin@163.com',
-        'displayName': 'admin user',
-        'firstName': 'admin',
-        'middleName': '',
-        'lastName': 'user',
-        'status': 1,
-        'roles': [
-            'staff'
-        ]
-    }];
+    const seedUsers = [
+        {
+            'password': 'default',
+            'email': 'super@163.com',
+            'displayName': 'super user',
+            'firstName': 'super',
+            'middleName': '',
+            'lastName': 'user',
+            'status': 1,
+            'roles': [
+                'superuser'
+            ]
+        },
+        {
+            'password': 'default',
+            'email': 'admin@163.com',
+            'displayName': 'admin user',
+            'firstName': 'admin',
+            'middleName': '',
+            'lastName': 'user',
+            'status': 1,
+            'roles': [
+                'staff'
+            ]
+        }
+    ];
+
     const Staff = mongoose.model('auth');
+
     async.each(seedUsers, (seedUser, callback) => {
         Staff.findOne({email: seedUser.email}).exec((err, user) => {
             config.info(user);
@@ -119,9 +124,10 @@ const addDefaultMenu = (done) => {
     });
 };
 
-const addDefaultMessages = done => {
-    const Message = mongoose.model('message');
-    const seedMessages = require('./messages.json');
+const addDefaultMessages = (done) => {
+    const Message = mongoose.model('message'),
+        seedMessages = require('./messages.json');
+
     async.each(seedMessages, (seedMessage, callback) => {
         Message.findOne({code: seedMessage.code}).exec((err, message) => {
             if (err) {
@@ -145,10 +151,7 @@ const addDefaultMessages = done => {
             }
         });
     }, (err) => {
-        if (err) {
-            return done(err, null);
-        }
-
+        if (err) return done(err, null);
         return done();
     });
 };

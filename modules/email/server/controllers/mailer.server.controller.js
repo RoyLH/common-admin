@@ -1,9 +1,3 @@
-/**
- * Copyright 2014 Erealm Info & Tech.
- *
- * Created by ken on 06/08/2015.
- */
-
 'use strict';
 
 let fs = require('fs'),

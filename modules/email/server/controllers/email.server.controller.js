@@ -1,6 +1,3 @@
-/**
- * Created by Don on 9/28/2017.
- */
 'use strict';
 
 let path = require('path'),

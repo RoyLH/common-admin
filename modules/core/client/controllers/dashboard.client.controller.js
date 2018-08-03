@@ -16,7 +16,7 @@
         vm.init = init;
         vm.changeScreenStatus = changeScreenStatus;
         vm.goDefaultMenu = goDefaultMenu;
-        vm.mainTitle = $window.config.title || 'CommonService';
+        vm.mainTitle = $window.config.title || 'mean-common-backend';
 
         $rootScope.refreshConfig = init;
 
