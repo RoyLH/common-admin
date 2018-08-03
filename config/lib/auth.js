@@ -56,7 +56,7 @@ exports.isAllowed = (req, res, next) => {
     let user = req.user;
     let roles = (user) ? user.roles : ['guest'];
 
-    acl.areAnyRolesAllowed(role, req.route.path, req.method.toLowerCase(), (err, isAllowed) => {
+    acl.areAnyRolesAllowed(roles, req.route.path, req.method.toLowerCase(), (err, isAllowed) => {
         if (err) {
             // An authorization error occurred.
             return res.send(responseHandler.getResponseData());

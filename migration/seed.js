@@ -59,19 +59,16 @@ const addSeedUser = done => {
                 });
             }
         });
-    }, err => {
-        if (err) {
-            return done(err, null);
-        }
-
+    }, (err) => {
+        if (err) return done(err, null);
         return done();
     });
 };
 
 const addEmailTemplates = done => {
-    const copyright = config.copyright;
-    const EmailTemplate = mongoose.model('emailTemplate');
-    const mailTemplates = require('./emails.json');
+    const copyright = config.copyright,
+        EmailTemplate = mongoose.model('emailTemplate'),
+        mailTemplates = require('./emails.json');
 
     const titles = [];
     mailTemplates.forEach(function (item) {
@@ -80,29 +77,25 @@ const addEmailTemplates = done => {
 
     const saveItem = function (item, callback) {
         const emailTemplate = new EmailTemplate(item);
-        emailTemplate.save(function (err, newEmailTemplate) {
+        emailTemplate.save((err, newEmailTemplate) => {
             console.log('save mail template:' + newEmailTemplate.name);
             callback(err, newEmailTemplate);
         });
     };
 
-    const finish = function (err, results) {
-        if (err) {
-            console.log(err);
-        }
+    const finish = function (err) {
+        if (err) console.log(err);
         console.log('save mail template finished');
         done(err);
     };
 
-    EmailTemplate.remove({title: {$in: titles}}, function (err, tanks) {
-        if (err) {
-            return done(err);
-        }
+    EmailTemplate.remove({title: {$in: titles}}, function (err) {
+        if (err) return done(err);
         async.map(mailTemplates, saveItem, finish);
     });
 };
 
-const addDefaultMenu = done => {
+const addDefaultMenu = (done) => {
     const Config = mongoose.model('sysConfig');
     Config.findOne({'name': 'system-menu'}).exec((err, sysConfig) => {
         config.info(sysConfig);
@@ -151,7 +144,7 @@ const addDefaultMessages = done => {
                 });
             }
         });
-    }, err => {
+    }, (err) => {
         if (err) {
             return done(err, null);
         }

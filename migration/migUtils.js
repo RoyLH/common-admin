@@ -1,4 +1,5 @@
 'use strict';
+
 require('dotenv').load();
 
 const path = require('path'),
