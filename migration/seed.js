@@ -8,7 +8,7 @@ const path = require('path'),
     async = require('async'),
     dbUtils = require('./migUtils');
 
-const addSeedUser = done => {
+const addSeedUser = (done) => {
     const seedUsers = [
         {
             'password': 'default',
@@ -70,7 +70,7 @@ const addSeedUser = done => {
     });
 };
 
-const addEmailTemplates = done => {
+const addEmailTemplates = (done) => {
     const copyright = config.copyright,
         EmailTemplate = mongoose.model('emailTemplate'),
         mailTemplates = require('./emails.json');
