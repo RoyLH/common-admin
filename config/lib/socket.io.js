@@ -1,6 +1,5 @@
 'use strict';
 
-// Load the module dependencies
 const config = require('../config'),
     path = require('path'),
     http = require('http'),

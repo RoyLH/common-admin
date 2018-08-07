@@ -1,10 +1,5 @@
-/**
- * Copyright 2016 JudgeMyFoto, Inc.
- *
- * Created by ken on 11/16/15
- */
-
 'use strict';
+
 const config = require('../config/config'),
     mongoose = require('mongoose'),
     fs = require('fs'),

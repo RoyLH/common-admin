@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 const _ = require('lodash'),
     chalk = require('chalk'),
     glob = require('glob'),
