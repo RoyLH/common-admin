@@ -1,4 +1,4 @@
-# commonService2.0 说明文档
+# common-backend 说明文档
 基于meanjs 0.5.0版开发
 ## 基本运行环境
 Node.js ~6.11.0 (6.11.4)

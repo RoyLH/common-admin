@@ -4,7 +4,7 @@ const defaultEnvConfig = require('./default');
 
 module.exports = {
     db: {
-        uri: process.env.TEST_DB_CONFIG || 'mongodb://user:123gogogo@120.27.52.242:27758/common_service-test',
+        uri: process.env.TEST_DB_CONFIG || 'mongodb://120.0.0.1:27017/common-backend-test',
         debug: process.env.MONGODB_DEBUG || false // Enable mongoose debug mode
     },
     log: {

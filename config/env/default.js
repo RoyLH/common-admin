@@ -6,17 +6,17 @@ const winston = require('winston'),
 module.exports = {
     app: {
         version: '1.0.0',
-        title: process.env.APP_TITLE || 'mean-common-backend',
-        description: process.env.APP_DESCRIPTION || 'mean-common-backend',
-        keywords: process.env.APP_KEYWORDS || 'mean-common-backend',
+        title: process.env.APP_TITLE || 'common-backend',
+        description: process.env.APP_DESCRIPTION || 'common-backend',
+        keywords: process.env.APP_KEYWORDS || 'common-backend',
         GTMTrackingID: process.env.GTM_TRACKING_ID
     },
-    copyright: process.env.APP_TITLE || 'mean-common-backend', // copyright for email templates
+    copyright: process.env.APP_TITLE || 'common-backend', // copyright for email templates
     port: process.env.PORT || 7000,
     host: process.env.HOST || '0.0.0.0',
     db: {
         promise: global.Promise,
-        uri: process.env.DB_CONFIG_URI || 'mongodb://127.0.0.1:27017/mean-common-backend',
+        uri: process.env.DB_CONFIG_URI || 'mongodb://127.0.0.1:27017/common-backend',
         debug: process.env.MONGODB_DEBUG || false // Enable mongoose debug mode
     },
     sessionCookie: {
@@ -24,7 +24,7 @@ module.exports = {
         httpOnly: true,
         secire: true
     },
-    sessionSecret: process.env.SESSION_SECRET || 'mean-common-backend',
+    sessionSecret: process.env.SESSION_SECRET || 'common-backend',
     // sessionKey is set to the generic sessionId key used by PHP applications
     // for obsecurity reasons
     sessionKey: 'sessionId',

@@ -1,5 +1,5 @@
 {
-  "name": "mean-common-backend",
+  "name": "common-backend",
   "description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
   "version": "0.5.0",
   "meanjs-version": "0.5.0",
