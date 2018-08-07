@@ -23,7 +23,8 @@
     "start:debug": "node-debug --web-host 0.0.0.0 server.js & gulp debug",
     "gulp": "gulp",
     "lint": "gulp lint",
-    "postinstall": "nsp check & gulp makeUploadAndLogDir"
+    "postinstall": "nsp check & gulp makeUploadAndLogDir",
+    "migration": "node ./migration/seed.js"
   },
   "dependencies": {
     "acl": "~0.4.10",
