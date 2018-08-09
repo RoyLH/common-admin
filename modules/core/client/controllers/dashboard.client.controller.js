@@ -24,6 +24,8 @@
             vm.menus = [];
 
             vm.fullScreen = (!localStorage.getItem('screenStatus') || localStorage.getItem('screenStatus') === 'true');
+            console.log(vm.fullScreen);
+
 
             ConfigService.query(function (result) {
                 var allState = $state.get();
@@ -35,7 +37,7 @@
                         var menus = JSON.parse(config.option);
                         menus.forEach(function (menu) {
                             if (validMenus.indexOf(menu.state) > -1 &&
-                                (vm.auth.roles.indexOf('superuser') > -1 || ((vm.auth.roles.indexOf('stuff') > -1) && (menu.roles.indexOf('stuff') > -1)))) {
+                                (vm.auth.roles.indexOf('superuser') > -1 || ((vm.auth.roles.indexOf('staff') > -1) && (menu.roles.indexOf('staff') > -1)))) {
                                 vm.menus.push(menu);
                                 if (!menu.topBar && !vm.verticalMenu) {
                                     vm.verticalMenu = true;
@@ -45,9 +47,6 @@
                                 }
                             }
                         });
-                        console.log(vm.verticalMenu);
-                        console.log(vm.defaultMenuState);
-                        console.log(vm.menus);
                         return true;
                     }
 

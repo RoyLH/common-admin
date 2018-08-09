@@ -1,9 +1,3 @@
-/**
- * Copyright 2017 Erealm Info & Tech.
- *
- * Created by ken at 28 September 2017.
- */
-
 'use strict';
 
 /**
@@ -12,7 +6,7 @@
 exports.invokeRolesPolicies = function (acl) {
     acl.allow([
         {
-            roles: ['stuff', 'superuser'],
+            roles: ['staff', 'superuser'],
             allows: [
                 {
                     resources: '/app/messages',

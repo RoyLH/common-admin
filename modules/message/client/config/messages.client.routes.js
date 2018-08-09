@@ -24,7 +24,7 @@
               messageResolve: newMessage
           },
           data: {
-              roles: ['stuff', 'superuser'],
+              roles: ['staff', 'superuser'],
               pageTitle: 'Edit Message {{ messageResolve.name }}'
           }
       });

@@ -3,7 +3,7 @@
 exports.invokeRolesPolicies = (acl) => {
     acl.allow([
         {
-            roles: ['stuff', 'superuser'],
+            roles: ['staff', 'superuser'],
             allows: [
                 {
                     resources: '/app/auth/password',
