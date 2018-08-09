@@ -24,7 +24,8 @@
     "gulp": "gulp",
     "lint": "gulp lint",
     "postinstall": "nsp check & gulp makeUploadAndLogDir",
-    "migration": "node ./migration/seed.js"
+    "migration": "node ./migration/seed.js",
+    "dev": "node ./server.js"
   },
   "dependencies": {
     "acl": "~0.4.10",
