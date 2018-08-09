@@ -16,7 +16,7 @@
         vm.init = init;
         vm.changeScreenStatus = changeScreenStatus;
         vm.goDefaultMenu = goDefaultMenu;
-        vm.mainTitle = $window.config.title || 'mean-common-backend';
+        vm.mainTitle = $window.config.title || 'common-backend';
 
         $rootScope.refreshConfig = init;
 
@@ -34,8 +34,8 @@
                     if (config.name === 'system-menu') {
                         var menus = JSON.parse(config.option);
                         menus.forEach(function (menu) {
-                            if (validMenus.indexOf(menu.state) > -1
-                                && (vm.auth.roles.indexOf('superuser') > -1 || ((vm.auth.roles.indexOf('admin') > -1) && (menu.roles.indexOf('admin') > -1)))) {
+                            if (validMenus.indexOf(menu.state) > -1 &&
+                                (vm.auth.roles.indexOf('superuser') > -1 || ((vm.auth.roles.indexOf('stuff') > -1) && (menu.roles.indexOf('stuff') > -1)))) {
                                 vm.menus.push(menu);
                                 if (!menu.topBar && !vm.verticalMenu) {
                                     vm.verticalMenu = true;
@@ -45,6 +45,9 @@
                                 }
                             }
                         });
+                        console.log(vm.verticalMenu);
+                        console.log(vm.defaultMenuState);
+                        console.log(vm.menus);
                         return true;
                     }
 

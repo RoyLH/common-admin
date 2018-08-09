@@ -16,7 +16,7 @@
                 controllerAs: 'vm',
                 data: {
                     pageTitle: 'Dashboard-Config',
-                    roles: 'superuser'
+                    roles: ['superuser']
                 }
             });
     }

@@ -12,7 +12,7 @@
 exports.invokeRolesPolicies = function (acl) {
     acl.allow([
         {
-            roles: ['admin', 'superuser'],
+            roles: ['stuff', 'superuser'],
             allows: [
                 {
                     resources: '/app/messages',

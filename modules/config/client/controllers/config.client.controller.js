@@ -1,6 +1,6 @@
 (function () {
     'use strict';
-    
+
     angular
         .module('config')
         .controller('ConfigController', ConfigController)
@@ -30,12 +30,12 @@
                 vm.sysConfigs.some(function (config) {
                     if (config.name === 'system-menu') {
                         vm.menuConfig = config;
-                        vm.menus = JSON.parse(config.options);
+                        vm.menus = JSON.parse(config.option);
                         return true;
                     }
 
-                    return flase;
-                })
+                    return false;
+                });
             });
         }
 
@@ -148,7 +148,6 @@
             vm.menuConfig.option = JSON.stringify(vm.menus);
             saveConfig(vm.menuConfig);
         }
-
     }
 
     MenuModalController.$inject = ['$scope', '$state', '$uibModalInstance', 'menu', 'currentAction'];

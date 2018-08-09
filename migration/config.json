@@ -14,7 +14,7 @@
     "mobile": false,
     "roles": [
       "superuser",
-      "admin"
+      "stuff"
     ],
     "order": 1
   },
@@ -33,7 +33,7 @@
     "mobile": false,
     "roles": [
       "superuser",
-      "admin"
+      "stuff"
     ],
     "order": 3
   }
