@@ -6,7 +6,7 @@
         .controller('DashboardController', DashboardController);
 
     DashboardController.$inject = ['$rootScope', '$window', '$state', 'ConfigService', 'Authentication', 'Socket', 'Notification'];
-    
+
     function DashboardController($rootScope, $window, $state, ConfigService, Authentication, Socket, Notification) {
         var vm = this;
 
@@ -19,7 +19,7 @@
         vm.mainTitle = $window.config.title || 'CommonService';
 
         $rootScope.refreshConfig = init;
-        
+
         function init() {
             vm.menus = [];
 
@@ -47,6 +47,7 @@
                         });
                         return true;
                     }
+                    return false;
                 });
 
                 if (!Socket.socket) {

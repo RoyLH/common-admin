@@ -24,8 +24,6 @@
             vm.menus = [];
 
             vm.fullScreen = (!localStorage.getItem('screenStatus') || localStorage.getItem('screenStatus') === 'true');
-            console.log(vm.fullScreen);
-
 
             ConfigService.query(function (result) {
                 var allState = $state.get();
