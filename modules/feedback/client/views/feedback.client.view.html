@@ -1,0 +1,72 @@
+<div id="admin_clients_container" class="feedback-page" ng-init="vm.init()">
+  <div class="responsive">
+    <div class="panel panel-default user-form clearfix">
+      <div class="panel-heading hidden-xs">
+        <div class="panel-title">
+          <h2 translate="feedback.TITLE">Feedback List</h2></div>
+      </div>
+      <div class="panel-body" id="admin_users_list">
+        <form class="form-horizontal clearfix">
+          <div class="filter-item pull-left">
+            <label class="control-label col-xs-4" translate="feedback.STATUS">Status:</label>
+            <div class="col-xs-8">
+              <select name="levelFilter" class="form-control select"
+                      ng-model="vm.options.level" ng-options="level.value as 'common.' + level.name | translate for level in vm.levels"
+                      ng-change="vm.init()">
+                <option value=""> --{{'feedback.ALL_STATUS' | translate}}-- </option>
+              </select>
+            </div>
+          </div>
+        </form>
+        <table class="table table-hover" id="client_list">
+          <thead>
+          <tr class="table-head table-sortable">
+            <th sort order="'feedbackName'" target="'clients'">
+                <span translate="feedback.NAME">Feedback Name</span>
+            </th>
+            <th sort order="'level'" target="'clients'">
+                <span translate="feedback.LEVEL">Level</span>
+            </th>
+            <th>
+                <span translate="feedback.NOTES">Notes</span>
+            </th>
+            <th sort order="'clientName'" target="'clients'">
+                <span translate="feedback.CLIENT">Client</span>
+            </th>
+            <th sort order="'createTime'" target="'clients'">
+                <span translate="feedback.CREATED">Created</span>
+            </th>
+            <th>
+                <span translate="feedback.ACTIONS">Actions</span>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="feedback in vm.feedback.docs | orderBy: selectItemGroup.clients:reverseGroup.clients" ng-class="{'show-detail': showDetail}">
+            <td ng-bind="feedback.feedbackName"></td>
+            <td ng-bind="{1: 'Info', 2: 'Log', 3: 'Warning', 4: 'Error'}[feedback.level]"></td>
+            <td class="feedback-note" ng-class="{'wrap-note':!feedback.isShowComplete}" ng-click="feedback.isShowComplete=!feedback.isShowComplete" ng-bind-html="feedback.isShowComplete?feedback.comments:feedback.shortComments"></td>
+            <td ng-bind="feedback.clientName"></td>
+            <td ng-bind="feedback.created | date:'MMM dd yyyy HH:mm'"></td>
+            <td class="hidden-sm text-center">
+              <a class="action-icon glyphicon glyphicon-trash" title="{{'common.DELETE' || 'Delete' | translate}}"
+                 ng-click="vm.remove(feedback)"
+                 href="javascript:void(0)"></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div align="center" ng-if="vm.feedback.total/vm.options.limit>1">
+          <uib-pagination boundary-links="true" ng-change="vm.init()" items-per-page="vm.options.limit"
+                          max-size="3" total-items="vm.feedback.total" ng-model="vm.options.page" class="pagination-sm"
+                          previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+          </uib-pagination>
+        </div>
+
+        <div class="report-none-message sm ng-hide" ng-show="vm.feedback.docs.length == 0" id="clients_none_message">No Feedback
+          Found
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
