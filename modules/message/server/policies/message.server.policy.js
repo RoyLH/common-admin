@@ -1,12 +1,9 @@
 'use strict';
 
-/**
- * Invoke Messages Permissions
- */
-exports.invokeRolesPolicies = function (acl) {
+exports.invokeRolesPolicies = (acl) => {
     acl.allow([
         {
-            roles: ['staff', 'superuser'],
+            roles: ['admin', 'superuser'],
             allows: [
                 {
                     resources: '/app/messages',

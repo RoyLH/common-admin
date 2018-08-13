@@ -7,7 +7,7 @@ exports.invokeRolesPolicies = function (acl) {
 
   // internal API.
     acl.allow([{
-        roles: ['superuser', 'staff'],
+        roles: ['superuser', 'admin'],
         allows: [{
             resources: [
                 '/app/clients',

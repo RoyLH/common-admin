@@ -3,7 +3,7 @@
 module.exports = {
     client: {
         lib: {
-            css:[
+            css: [
                 'node_modules/bootstrap/dist/css/bootstrap.min.css',
                 'node_modules/ng-sortable/dist/ng-sortable.min.css',
                 'node_modules/textangular/dist/textAngular.css'

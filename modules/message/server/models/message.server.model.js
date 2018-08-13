@@ -1,16 +1,10 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 const mongoose = require('mongoose'),
     mongoosePaginate = require('mongoose-paginate'),
     Schema = mongoose.Schema;
 
-/**
- * Message Schema
- */
-let MessageSchema = new Schema({
+const MessageSchema = new Schema({
     code: {
         type: String,
         default: '',
@@ -30,7 +24,6 @@ let MessageSchema = new Schema({
         enum: [1, 2, 3, 4]  // 1: error, 2: warning, 3: info, 4: success
     }
 }, {timestamps: {createdAt: 'created', updatedAt: 'updated'}});
-
 
 MessageSchema.plugin(mongoosePaginate);
 mongoose.model('message', MessageSchema, 'messages');

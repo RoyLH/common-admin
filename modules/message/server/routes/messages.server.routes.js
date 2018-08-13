@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * Module dependencies
- */
 const path = require('path'),
     authHelper = require(path.resolve('./config/lib/auth')),
     messages = require('../controllers/message.server.controller');

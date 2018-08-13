@@ -7,7 +7,7 @@ const path = require('path'),
     async = require('async'),
     DBTools = require(path.resolve('./config/lib/mongoose.js'));
 
-/***
+/** *
  * execute data migration tasks, supports mode both 'parallel' and 'waterfall', default is 'parallel'
  * the tasks are functions, different mode have some requirements of the functions, see async document.
  * @param tasks
@@ -17,7 +17,7 @@ exports.execMigrationTasks = (tasks, mode) => {
     DBTools.loadModels(() => {
         // Connect to database
         DBTools.connect((db) => {
-            const callback = (err) =>  {
+            const callback = (err) => {
                 if (err) {
                     config.error('wrong when exec tasks', err, tasks, mode);
                 } else {

@@ -61,8 +61,8 @@ module.exports = function (app, db) {
         });
     });
 
-    config.emitMessage = function(message) {
-        io.sockets.emit('message', message)
+    config.emitMessage = function (message) {
+        io.sockets.emit('message', message);
     };
 
     return server;

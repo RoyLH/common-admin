@@ -34,7 +34,7 @@
                 controllerAs: 'vm',
                 data: {
                     pageTitle: 'Dashboard',
-                    roles: ['staff', 'superuser']
+                    roles: ['admin', 'superuser']
                 }
             })
             .state('home', {

@@ -12,7 +12,7 @@ const mongoose = require('mongoose'),
     ClientPasswordStrategy = require('passport-oauth2-client-password').Strategy,
     Client = mongoose.model('client');
 
-function checkClient (clientID, clientSecret, done) {
+function checkClient(clientID, clientSecret, done) {
     Client.findOne({
         clientID: clientID,
         status: 1

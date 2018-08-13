@@ -20,7 +20,7 @@ exports.create = (req, res, next) => {
                 code: '402001',
                 data: newTemplate,
                 messageInfo: ['Template', newTemplate.name]
-            })
+            });
         })
         .catch(next);
 };
@@ -49,7 +49,7 @@ exports.update = (req, res, next) => {
                 code: '402002',
                 data: emailTemplate,
                 messageInfo: ['Template', emailTemplate.name]
-            })
+            });
         })
         .catch(next);
 };
@@ -66,7 +66,7 @@ exports.delete = (req, res, next) => {
                 code: '402003',
                 data: emaiTemplate,
                 messageInfo: ['Template', emailTemplate.name]
-            })
+            });
         })
         .catch(next);
 };

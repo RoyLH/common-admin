@@ -63,9 +63,9 @@ const AuthSchema = new Schema({
     roles: {
         type: [{
             type: String,
-            enum: ['staff', 'superuser']
+            enum: ['admin', 'superuser']
         }],
-        default: ['staff'],
+        default: ['admin'],
         required: 'Please provide at least one role'
     },
     status: {

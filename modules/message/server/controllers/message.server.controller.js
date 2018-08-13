@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 const path = require('path'),
     mongoose = require('mongoose'),
     Message = mongoose.model('message'),

@@ -16,7 +16,7 @@
                 controller: 'ClientController',
                 data: {
                     pageTitle: 'Dashboard-Client',
-                    roles: ['superuser', 'staff']
+                    roles: ['superuser', 'admin']
                 }
             });
     }

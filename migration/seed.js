@@ -31,7 +31,7 @@ const addSeedUser = (done) => {
             'lastName': 'user',
             'status': 1,
             'roles': [
-                'staff'
+                'admin'
             ]
         }
     ];

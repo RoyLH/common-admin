@@ -18,7 +18,7 @@
             controllerAs: 'vm',
             data: {
                 pageTitle: 'email',
-                roles: ['superuser', 'staff']
+                roles: ['superuser', 'admin']
             }
         });
     }

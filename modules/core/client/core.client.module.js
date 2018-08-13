@@ -3,4 +3,4 @@
 
     app.registerModule('core');
     app.registerModule('core.routes');
-})(ApplicationConfiguration);
+}(ApplicationConfiguration));

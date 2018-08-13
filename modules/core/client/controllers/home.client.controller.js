@@ -35,7 +35,7 @@
                         var menus = JSON.parse(config.option);
                         menus.forEach(function (menu) {
                             if (validMenus.indexOf(menu.state) > -1
-                                && (vm.auth.roles.indexOf('superuser') > -1 || ((vm.auth.roles.indexOf('') > -1) && (menu.roles.indexOf('staff') > -1)))) {
+                                && (vm.auth.roles.indexOf('superuser') > -1 || ((vm.auth.roles.indexOf('') > -1) && (menu.roles.indexOf('admin') > -1)))) {
                                 vm.menus.push(menu);
                                 if (!menu.topBar && !vm.verticalMenu) {
                                     vm.verticalMenu = true;
