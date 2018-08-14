@@ -22,6 +22,7 @@
         vm.menusSortConfig = {
             handleClass: 'glyphicon-menu-hamburger',
             orderChanged: changeMenuOrder
+
         };
 
         function refresh() {
@@ -143,9 +144,10 @@
         }
 
         function changeMenuOrder(event) {
-            vm.menus[event.dest.index].order = event.dest.index;
             vm.menus[event.source.index].order = event.source.index;
+            vm.menus[event.dest.index].order = event.dest.index;
             vm.menuConfig.option = JSON.stringify(vm.menus);
+
             saveConfig(vm.menuConfig);
         }
     }

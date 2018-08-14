@@ -18,7 +18,7 @@
             </tr>
             </thead>
             <tbody data-as-sortable="vm.menusSortConfig" data-ng-model="vm.menus">
-            <tr ng-repeat-start="menu in vm.menus track by $index" ng-class="{'show-detail': showDetail}" data-as-sortable-item>
+            <tr ng-repeat-start="menu in vm.menus" ng-class="{'show-detail': showDetail}" data-as-sortable-item>
               <td ng-bind="menu.name"></td>
               <td ng-bind="menu.state"></td>
               <td>

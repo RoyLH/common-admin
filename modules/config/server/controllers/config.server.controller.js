@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * Module dependencies.
- */
 const path = require('path'),
     _ = require('lodash'),
     mongoose = require('mongoose'),
@@ -41,7 +38,6 @@ exports.read = (req, res) => {
  */
 exports.update = (req, res, next) => {
     let sysConfig = req.sysConfig;
-
     sysConfig = _.extend(sysConfig, req.body);
 
     sysConfig.save()
