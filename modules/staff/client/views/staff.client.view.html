@@ -1,0 +1,232 @@
+<!--Common Design-->
+<!--Responsive Web Design-->
+<div class="responsive">
+  <div class="panel panel-default user-form clearfix" ng-init="vm.refreshStaff()">
+    <div class="panel-heading hidden-xs">
+      <div class="panel-title"><h2 translate="staff.TITLE">Staff List</h2></div>
+    </div>
+    <div class="panel-body" id="admin_users_list" src="staffTemplate.url">
+      <table class="table table-hover hidden-xs responsive" id="user_list">
+        <thead>
+        <tr class="table-head table-sortable">
+          <th class="width-md" sort order="'email'" target="'users'">
+            <span translate="staff.EMAIL">Email</span>
+          </th>
+          <th sort order="'displayName'" target="'users'">
+              <span translate="staff.DISPLAY_NAME">Display Name</span>
+          </th>
+          <th class="hidden-sm" sort order="'status'" target="'users'">
+              <span translate="staff.STATUS">Status</span>
+          </th>
+          <th class="hidden-sm" sort order="'roles'" target="'users'">
+              <span translate="staff.ADMIN">Is Admin</span>
+          </th>
+          <th class="hidden-sm cell-size-action-lg">
+              <span translate="staff.ACTIONS">Actions</span>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat-start="staff in vm.staffs | orderBy: selectItemGroup.staffs:reverseGroup.staffs"
+            ng-class="{'show-detail': showDetail}">
+          <td ng-bind="staff.email"></td>
+          <td ng-bind="staff.displayName"></td>
+          <td class="hidden-sm" ng-bind="{'-1': 'Blocked', '0': 'First Login', '1': 'Active'}['' + staff.status]"></td>
+          <td ng-bind="(staff.roles.indexOf('staff')>-1)?'Yes':'No'"></td>
+          <td class="hidden-sm">
+            <div ng-show="vm.currentOrganization.status !== 0" read-only="hide">
+              <a class="action-icon glyphicon glyphicon-edit" title="{{'common.EDIT' || 'Edit' | translate}}"
+                 ng-click="vm.selectStaff(staff, 'update');"
+                 href="javascript:void(0)"></a>
+              <a class="action-icon glyphicon glyphicon-trash" title="{{'common.DELETE' || 'Delete' | translate}}" ng-if="staff.status !== 1"
+                 ng-click="vm.deleteStaff(staff)" href="javascript:void(0)"></a>
+              <a class="action-icon glyphicon glyphicon-ban-circle" title="{{'common.BLOCK' || 'Block' | translate}}" ng-if="staff.status == 1"
+                 ng-click="vm.selectStaff(staff, 'deactivate')" href="javascript:void(0)"></a>
+              <a class="action-icon glyphicon glyphicon-plus" title="{{'common.ACTIVATE' || 'Activate' | translate}}"
+                 ng-click="vm.selectStaff(staff, 'activate')" ng-if="staff.status == -1" href="javascript:void(0)"></a>
+              <a class="action-icon glyphicon glyphicon-repeat" title="{{'common.RESET' || 'Reset' | translate}}" ng-if="staff.status !== -1"
+                 ng-click="vm.resetPassword(staff);" href="javascript:void(0)"></a>
+            </div>
+            <div ng-show="vm.currentOrganization.status === 0">
+              <span class="glyphicon glyphicon-lock" id="report_none_message"></span>
+            </div>
+          </td>
+        </tr>
+        <tr ng-if="showDetail" class="table-row-detail" ng-repeat-end="">
+          <td colspan="3">
+            <ul>
+              <li data-title="Status"
+                  ng-bind="{'-1': 'Blocked', '0': 'First Login', '1': 'Active'}['' + staff.status]"></li>
+              <li data-title="Actions" ng-show="vm.currentStaff.email !== staff.email && vm.currentOrganization.status !== 0"
+                  read-only="hide">
+                <a class="action-icon glyphicon glyphicon-edit" title="{{'common.EDIT' || 'Edit' | translate}}"
+                   ng-click="vm.selectStaff(staff, 'update');"
+                   href="javascript:void(0)"></a>
+                <a class="action-icon glyphicon glyphicon-trash" title="{{'common.DELETE' || 'Delete' | translate}}" ng-if="staff.status !== 1"
+                   ng-click="vm.deleteStaff(staff)" href="javascript:void(0)"></a>
+                <a class="action-icon glyphicon glyphicon-ban-circle" title="{{'common.BLOCK' || 'Block' | translate}}" ng-if="staff.status == 1"
+                   ng-click="vm.selectStaff(staff, 'deactivate')" href="javascript:void(0)"></a>
+                <a class="action-icon glyphicon glyphicon-plus" title="{{'common.ACTIVATE' || 'Activate' | translate}}"
+                   ng-click="vm.selectStaff(staff, 'activate')" ng-if="staff.status == -1" href="javascript:void(0)"></a>
+                <a class="action-icon glyphicon glyphicon-repeat" title="{{'common.RESET' || 'Reset' | translate}}"
+                   ng-if="staff.status !== -1"
+                   ng-click="vm.resetPassword(staff);" href="javascript:void(0)"></a>
+              </li>
+              <li data-title="Actions" ng-if="vm.currentOrganization.status === 0">
+                <span class="glyphicon glyphicon-lock"></span>
+              </li>
+            </ul>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!--Responsive Web Design-->
+      <div class="row visible-xs"
+           ng-repeat="staff in vm.staffs | filter: vm.searchText||'' | orderBy: selectItem:reverse">
+        <ul class="responsive-user-list clearfix">
+          <li class="">
+            <b ng-bind="staff.displayName"></b>
+          </li>
+
+          <li class="pull-right">
+            <span ng-bind="{'-1': 'Blocked', '0': 'First Login', '1': 'Active'}['' + staff.status]"></span>
+          </li>
+          <li class="">
+            <span ng-bind="staff.email"></span>
+          </li>
+          <li read-only="hide" class="pull-right"
+              ng-if="vm.currentStaff.email !== staff.email && vm.currentOrganization.status !== 0">
+            <a class="action-icon glyphicon glyphicon-edit" title="{{'common.EDIT' || 'Edit' | translate}}" ng-click="vm.selectStaff(staff, 'update');"
+               href="javascript:void(0)"></a>
+            <a class="action-icon glyphicon glyphicon-trash" title="{{'common.DELETE' || 'Delete' | translate}}" ng-if="staff.status !== 1"
+               ng-click="vm.deleteStaff(staff)" href="javascript:void(0)"></a>
+            <a class="action-icon glyphicon glyphicon-ban-circle" title="{{'common.BLOCK' || 'Block' | translate}}" ng-if="staff.status == 1"
+               ng-click="vm.selectStaff(staff, 'deactivate')" href="javascript:void(0)"></a>
+            <a class="action-icon glyphicon glyphicon-plus" title="{{'common.ACTIVATE' || 'Activate' | translate}}"
+               ng-click="vm.selectStaff(staff, 'activate')" ng-if="staff.status == -1" href="javascript:void(0)"></a>
+            <a class="action-icon glyphicon glyphicon-repeat" title="{{'common.RESET' || 'Reset' | translate}}" ng-if="staff.status !== -1"
+               ng-click="vm.resetPassword(staff);" href="javascript:void(0)"></a>
+          </li>
+          <li class="pull-right" ng-if="vm.currentOrganization.status === 0">
+            <span class="glyphicon glyphicon-lock"></span>
+          </li>
+          <li ng-bind="staff.roles.indexOf('staff')>-1?'Yes':'No'">
+          </li>
+          <li class="pull-right" ng-if="vm.currentOrganization.status === 0">
+            <span class="glyphicon glyphicon-lock"></span>
+          </li>
+        </ul>
+      </div>
+      <div class="report-none-message sm ng-hide" ng-show="vm.staffs.length == 0" id="user_none_message">No Staff Found
+      </div>
+    </div>
+    <div class="panel-footer">
+      <button id="admin_users_add_button" class="btn btn-default" ng-click="vm.selectStaff(null, 'add')">
+        <span class="btn-icon glyphicon glyphicon-plus"></span><b translate="staff.NEW_STAFF">New Staff</b></button>
+    </div>
+  </div>
+  <div align="center" ng-if="(vm.totalItemsCount/vm.pageOptions.limit)>1">
+    <uib-pagination boundary-links="true" ng-change="vm.refreshStaff();" items-per-page="vm.pageOptions.limit"
+                    max-size="7" total-items="vm.totalItemsCount" ng-model="vm.pageOptions.page" class="pagination-sm"
+                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                    last-text="&raquo;">
+    </uib-pagination>
+  </div>
+</div>
+
+
+<script type="text/ng-template" id="/staff_modal">
+  <div class="modal-header bg-success">
+    <h3 class="modal-title" ng-bind="vm.currentStaffAction.text === 'Add' ? 'staff.NEW_STAFF' || 'New Staff' : 'staff.UPDATE_STAFF' || 'Update Staff' | translate">Add New Staff</h3>
+  </div>
+  <div class="modal-body" ng-include src="vm.currentStaffAction.tpl">
+  </div>
+  <div class="modal-footer text-right">
+    <button class="btn" ng-click="$dismiss()"><i class="btn-icon glyphicon glyphicon-remove"></i><span translate="common.CANCEL">Cancel</span>
+    </button>
+    <button class="btn btn-default" ng-click="vm.operateStaff()" ng-disabled="vm.current.form.$invalid"><i
+      class="btn-icon glyphicon glyphicon-ok"></i><span translate="common.SAVE"></span>
+    </button>
+  </div>
+</script>
+<script type="text/ng-template" id="/add_staff_form">
+  <form role="form" name="addStaffForm" novalidate id="add_staff_form">
+    <div ng-init="vm.current.form = addStaffForm" class="form-group"
+         ng-class="{ 'has-error' : addStaffForm.email.$invalid && !addStaffForm.email.$pristine }">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+        <input autofocus type="text" name="email" placeholder="{{'staff.EMAIL' || 'Email' | translate}}" ng-model="vm.staff.email" class="form-control"
+               ng-pattern="validation.email" ng-disabled="vm.currentStaffAction.text=='Update'" required>
+      </div>
+      <p ng-show="addStaffForm.email.$error.pattern" class="help-block ng-hide" translate="error.INVALID_EMAIL">Invalid email address</p>
+    </div>
+    <div class="form-group"
+         ng-class="{ 'has-error' : addStaffForm.firstName.$invalid && !addStaffForm.firstName.$pristine }">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input type="text" name="firstName" placeholder="{{'staff.FIRST_NAME' || 'First Name' | translate}}" ng-model="vm.staff.firstName"
+               class="form-control" ng-minlength="2" ng-maxlength="100" ng-pattern="validation.userName"
+               required>
+      </div>
+      <p ng-show="addStaffForm.firstName.$error.pattern" class="help-block ng-hide" translate="error.ALPHABET">Alphabet only</p>
+
+      <p ng-show="!addStaffForm.firstName.$error.pattern && addStaffForm.firstName.$error.minlength"
+         class="help-block ng-hide" translate="error.MIN_LENGTH" translate-values="{length:2}">Minimum Length is 2</p>
+
+      <p ng-show="!addStaffForm.firstName.$error.pattern&&addStaffForm.firstName.$error.maxlength"
+         class="help-block ng-hide" translate="error.MAX_LENGTH" translate-values="{length:100}">Maximum Length is 100</p>
+    </div>
+    <div class="form-group"
+         ng-class="{ 'has-error' : addStaffForm.lastName.$invalid && !addStaffForm.lastName.$pristine }">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input type="text" name="lastName" placeholder="{{'staff.LAST_NAME' || 'Last Name' | translate}}" ng-model="vm.staff.lastName" class="form-control"
+               ng-minlength="2" ng-maxlength="100" ng-pattern="validation.userName" required>
+      </div>
+      <p ng-show="addStaffForm.lastName.$error.pattern" class="help-block ng-hide" translate="error.ALPHABET">Alphabet only</p>
+
+      <p ng-show="!addStaffForm.lastName.$error.pattern && addStaffForm.lastName.$error.minlength"
+         class="help-block ng-hide" translate="error.MIN_LENGTH" translate-values="{length:2}">Minimum Length is 2</p>
+
+      <p ng-show="!addStaffForm.lastName.$error.pattern && addStaffForm.lastName.$error.maxlength"
+         class="help-block ng-hide" translate="error.MAX_LENGTH" translate-values="{length:100}">Maximum Length is 100</p>
+    </div>
+
+  </form>
+</script>
+<script type="text/ng-template" id="/deactivate_staff_form">
+  <form id="deactivate_staff_form" class="form-horizontal" name="deactivateStaffForm"
+        ng-submit="submitForm(deactivateStaffForm.$valid)" novalidate>
+    <div ng-init="vm.current.form = deactivateStaffForm" class="form-group">
+      <label class="col-sm-4 control-label"><span translate="staff.DISPLAY_NAME">Display Name</span>:</label>
+
+      <div class="col-sm-8">
+        <p class="form-control-static" ng-bind="vm.staff.displayName"></p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 control-label"><span translate="staff.EMAIL">Email</span></label>
+
+      <div class="col-sm-8">
+        <p class="form-control-static" ng-bind="vm.staff.email"></p>
+      </div>
+    </div>
+    <div class="form-group"
+         ng-class="{'has-error': deactivateStaffForm.changeReason.$invalid && !deactivateStaffForm.changeReason.$pristine }">
+      <label class="col-sm-4 control-label required"><span translate="staff.REASON">Reason</span>:</label>
+
+      <div class="col-sm-8">
+                <textarea autofocus rows="3" ng-model="vm.staff.changeReason" name="changeReason" placeholder="{{'staff.REASON' || 'Reason' | translate}}"
+                          autocomplete="off" ng-minlength="8" ng-maxlength="100" required
+                          class="form-control"></textarea>
+
+        <p ng-show="deactivateStaffForm.changeReason.$error.minlength" class="help-block ng-hide" translate="error.MIN_LENGTH" translate-values="{length:8}">Minimum Length is
+          8</p>
+
+        <p ng-show="deactivateStaffForm.changeReason.$error.maxlength" class="help-block ng-hide" translate="error.MAX_LENGTH" translate-values="{length:100}">Maximum Length is
+          100</p>
+      </div>
+    </div>
+  </form>
+</script>
