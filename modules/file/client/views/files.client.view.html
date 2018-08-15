@@ -1,0 +1,171 @@
+<div id="admin_file_container" class="panel panel-default clearfix" ng-init="vm.init()">
+    <div class="panel-default">
+        <div class="responsive">
+            <div class="panel panel-default clearfix">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h2 translate="file.TITLE">File List</h2>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="file-control">
+                        <div class="btn-group pull-left">
+                            <button class="btn" ng-disabled="vm.folderIndex===0" ng-click="vm.toPreFolder()" title="{{'file.BACK' || 'Back' | translate}}">
+                                <i class="glyphicon glyphicon-share-alt reverse"></i>
+                            </button>
+                            <button class="btn" ng-disabled="vm.historyRecord.length-1===vm.folderIndex" ng-click="vm.toNextFolder()" title="{{'file.FORWARD' || 'Forward' | translate}}">
+                                <i class="glyphicon glyphicon-share-alt"></i>
+                            </button>
+                        </div>
+                        <ul class="breadcrumb pull-left">
+                            <li ng-bind="dir" ng-repeat="dir in vm.currentFolder.split('\\') track by $index"></li>
+                        </ul>
+                        <div class="pull-right btn-group">
+                            <button class="btn btn-default" ng-click="vm.showEditModal('upload')">
+                                <span translate="file.UPLOAD">Upload</span>
+                            </button>
+                            <button class="btn btn-default" ng-click="vm.showEditModal('createFolder')">
+                                <span translate="file.NEW_FOLDER">New Folder</span>
+                            </button>
+                            <button class="btn btn-default" ng-click="vm.removeFiles()">
+                                <span translate="file.REMOVE_CHECKED">Remove Checked</span>
+                            </button>
+                            <button class="btn btn-default" ng-click="vm.downloadFiles()">
+                                <span translate="file.DOWNLOAD_CHECKED">DownLoad Checked</span>
+                            </button>
+                            <button class="btn btn-default" ng-click="vm.insertFiles()">
+                                <span translate="file.TEST">Test</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <table class="table table-hover" ng-models="vm.files">
+                        <thead>
+                            <tr class="table-head table-sortable">
+                                <th class="col-xs-1 text-center"><span translate="file.TYPE">type</span></th>
+                                <th><span translate="file.NAME">name</span></th>
+                                <th><span translate="file.CREATED">created</span></th>
+                                <th><span translate="file.SIZE">size</span></th>
+                                <th class="col-xs-2 text-center"><span translate="file.ACTIONS">action</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-if="file.isDir===1" class="file-list" ng-repeat="file in vm.files" ng-class="{checked: file.checked}" ng-dblclick="vm.enterFolder(file)"
+                                ng-click="file.checked=!file.checked">
+                                <td>
+                                    <div class="img-icon">
+                                        <i class="glyphicon glyphicon-folder-open"></i>
+                                    </div>
+                                </td>
+                                <td ng-bind="file.name"></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-center">
+                                    <a href="javascript:void(0)" class="btn-icon glyphicon glyphicon-trash" ng-click="vm.remove(file)"></a>
+                                </td>
+                            </tr>
+                            <tr ng-if="file.isDir===0" ng-repeat="file in vm.files" ng-class="{checked: file.checked}" ng-click="file.checked=!file.checked"
+                                class="file-list">
+                                <td>
+                                    <div class="img-icon">
+                                        <img ng-if="vm.imgReg.test(file.name)" ng-src="{{file.link}}">
+                                        <i ng-if="!vm.imgReg.test(file.name)" class="glyphicon glyphicon-file"></i>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control"
+                                    ng-class="{editable:file.editable, uneditable:!file.editable}"
+                                    ng-readonly="!file.editable"
+                                    ng-model="file.customName">
+                                </td>
+                                <td ng-bind="file.created | date: 'yyyy-MM-dd'"></td>
+                                <td ng-bind="file.size | fileSizeFilter"></td>
+                                <td class="text-center">
+                                    <a href="javascript:void(0)" class="btn-icon glyphicon glyphicon-trash" ng-click="vm.remove(file)" title="{{'common.DELETE' || 'Delete' | translate}}"></a>
+                                    <a href="javascript:void(0)" class="btn-icon glyphicon glyphicon-save" ng-click="vm.download(file)" title="{{'common.DOWNLOAD' || 'Download' | translate}}"></a>
+                                    <a ng-show="!file.editable" href="javascript:void(0)" class="glyphicon glyphicon-edit" ng-click="file.editable=true" title="{{'common.EDIT' || 'Edit' | translate}}"></a>
+                                    <a ng-show="file.editable" href="javascript:void(0)" class="glyphicon glyphicon-ok" ng-click="vm.update(file)" title="{{'common.SAVE' || 'Save' | translate}}"></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div align="center" ng-if="vm.file.total/vm.file.limit>1">
+                        <uib-pagination boundary-links="true" ng-change="vm.init()" items-per-page="vm.options.limit" max-size="3" total-items="vm.file.total"
+                            ng-model="vm.options.page" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                            last-text="&raquo;">
+                        </uib-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="/create_folder_modal_html">
+    <div class="modal-header bg-success">
+        <h3 class="modal-title">Add Folder</h3>
+    </div>
+    <div class="modal-body">
+        <form name="createFolderForm">
+            <div class="form-group">
+                <label for="upload_service">Floder Name</label>
+                <input type="text" class="form-control" placeholder="{{'file.FOLDER_NAME' || 'Folder name' | translate}}" ng-model="vm.folderName" ng-required="true">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer text-right">
+        <button class="btn" ng-click="$dismiss()">
+            <i class="btn-icon glyphicon glyphicon-remove"></i>Cancel
+        </button>
+        <button class="btn btn-default" ng-disabled="createFolderForm.$invalid" ng-click="$close(vm.folderName)">
+            <i class="btn-icon glyphicon glyphicon-ok"></i>submit
+        </button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="/upload_files_modal_html">
+    <div class="modal-header">
+        <h3 class="modal-title">Upload Files</h3>
+    </div>
+    <div flow-init="vm.flowOptions" flow-prevent-drop flow-complete="$close($flow.files)">
+        <div class="modal-body" flow-drop>
+            <div ng-if="$flow.files.length === 0">
+                please drag file here or click upload.
+            </div>
+            <table class="table">
+                <tr class="file-list" ng-repeat="file in $flow.files">
+                    <td>
+                        <div class="img-icon">
+                            <i ng-if="!vm.imgReg.test(file.name)" class="glyphicon glyphicon-file"></i>
+                            <img ng-if="vm.imgReg.test(file.name)" flow-img="file" />
+                        </div>
+                    </td>
+                    <td ng-bind="file.name">
+                    </td>
+                    <td>
+                        <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                            <div id="responsive_upload_progress" class="progress-bar" role="progressbar" aria-valuenow="{{file.progress() * 100}}" aria-valuemin="0"
+                                aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}">
+                                <span>{{file.progress() * 100}}% Complete</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <i class="btn-icon glyphicon glyphicon-remove" ng-click="$flow.files.splice($index, 1)"></i>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="modal-footer text-right">
+            <button id="responsive_re_upload_button" class="btn btn-default" flow-btn>
+                <i class="glyphicon glyphicon-plus" ng-if="vm.multiFile"></i>Add Files
+            </button>
+            <button class="btn" ng-click="$dismiss()">
+                <i class="btn-icon glyphicon glyphicon-remove"></i>Cancel
+            </button>
+            <button class="btn btn-default" ng-click="$flow.upload()" ng-disabled="$flow.files.length===0">
+                <i class="btn-icon glyphicon glyphicon-ok"></i>Upload
+            </button>
+        </div>
+    </div>
+</script>

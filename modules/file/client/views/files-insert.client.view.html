@@ -1,0 +1,67 @@
+<div id="file_insert_modal" ng-init="vm.init()">
+    <div class="modal-header">
+        <h3 class="modal-title">Insert Images</h3>
+    </div>
+
+    <div flow-init="vm.flowOptions" 
+    flow-drop flow-name="insertFlow" 
+    flow-file-added="vm.checkIsImgFile($file)"
+    flow-file-success="vm.getUploadFiles($file, $message)">
+        <div class="modal-body">
+            <uib-tabset active="active">
+                <uib-tab index="1" heading="Upload" select="vm.showUploadTab=true">
+                    <div ng-if="$flow.files.length === 0">
+                        please drag file here or click upload.
+                    </div>
+                    <table ng-if="$flow.files.length != 0" class="table">
+                        <tr class="file-list" ng-repeat="file in $flow.files">
+                            <td>
+                                <div class="img-icon">
+                                    <i ng-if="!vm.imgReg.test(file.name)" class="glyphicon glyphicon-file"></i>
+                                    <img flow-img="file" />
+                                </div>
+                            </td>
+                            <td ng-bind="file.name">
+                            </td>
+                            <td>
+                                <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
+                                    <div id="responsive_upload_progress" class="progress-bar" role="progressbar" aria-valuenow="{{file.progress() * 100}}" aria-valuemin="0"
+                                        aria-valuemax="100" ng-style="{width: (file.progress() * 100) + '%'}">
+                                        <span>{{file.progress() * 100}}% Complete</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <i class="btn-icon glyphicon glyphicon-remove" ng-click="$flow.files.splice($index, 1)"></i>
+                            </td>
+                        </tr>
+                    </table>
+                </uib-tab>
+                <uib-tab index="0" heading="Select" select="vm.showUploadTab=false">
+                    <div ng-if="vm.files.length===0">
+                        No imgs, please upload;
+                    </div>
+                    <ul class="img-list">
+                        <li class="img-item" ng-click="file.checked=!file.checked;vm.selectFiles(file)" ng-class="{'checked': file.checked}" ng-repeat="file in vm.files">
+                            <img ng-src="{{file.link}}" alt="">
+                        </li>
+                    </ul>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+        <div class="modal-footer text-right">
+            <button class="btn btn-default" flow-btn ng-show="vm.showUploadTab">
+                <i class="glyphicon glyphicon-plus btn-icon"></i>Add Files
+            </button>
+            <button class="btn btn-default" ng-click="$flow.upload()" ng-show="vm.showUploadTab" ng-disabled="$flow.files.length===0">
+                    <i class="glyphicon glyphicon-plus btn-icon"></i>Upload
+                </button>
+            <button class="btn" ng-click="$dismiss(vm.selectedFiles)">
+                <i class="btn-icon glyphicon glyphicon-remove"></i>Cancel
+            </button>
+            <button class="btn btn-default" ng-click="$close(vm.uploadedFiles.concat(vm.selectedFiles))" ng-disabled="vm.selectedFiles.length===0 && vm.uploadedFiles.length===0">
+                <i class="btn-icon glyphicon glyphicon-ok"></i>Insert
+            </button>
+        </div>
+    </div>
+</div>
