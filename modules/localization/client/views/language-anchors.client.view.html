@@ -1,0 +1,180 @@
+<div id="admin_language_anchor_container" ng-init="vm.init()">
+    <div class="panel panel-default clearfix">
+        <!-- panel title -->
+        <div class="panel-heading hidden-xs">
+            <div class="panel-title">
+                <h2 translate="localization.TITLE">Language anchor</h2>
+            </div>
+        </div>
+        <div class="panel-body">
+            <uib-tabset active="active">
+                <uib-tab index="1" heading="{{'localization.LANGUAGE_ANCHORS' || 'Language Anchors' | translate}}">
+                    <div class="row tab-panel-content">
+                        <div class="col-lg-12 ">
+                            <button ng-click="vm.showEditModal('save')" class="btn btn-default">
+                                <i class="glyphicon glyphicon-plus btn-icon"></i>
+                                <span translate="localization.NEW_ANCHOR">New Language Anchor</span>
+                            </button>
+                            <div class="pull-right">
+                                <button ng-click="vm.showEditModal('import')" class="btn btn-default">
+                                    <span translate="localization.IMPORT">Import</span>
+                                </button>
+                                <button ng-click="vm.showEditModal('import', vm.languageAnchorsList)" class="btn btn-default">
+                                    <span translate="localization.EXPORT">Export</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th><span translate="localization.KEY">Key</span></th>
+                                <th><span translate="localization.CLIENTS">clients</span></th>
+                                <th ng-repeat="language in vm.languages" ng-bind="'localization.' + language.name | translate"></th>
+                                <th class="text-center"><span translate="localization.ACTION">action</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="wrap"
+                                ng-repeat="languageAnchor in vm.languageAnchorsList"
+                                ng-if="$index>=vm.options.limit*(vm.options.page-1) && $index<vm.options.limit*vm.options.page">
+                                <td class="col-xs-2" ng-bind="languageAnchor.key"></td>
+                                <td class="col-xs-2">
+                                    <p ng-if="languageAnchor.clients.length === 0">all</p>
+                                    <p ng-if="languageAnchor.clients.length > 0" ng-repeat="client in languageAnchor.clients" ng-bind="client"></p>
+                                </td>
+                                <td class="col-xs-3" ng-repeat="language in vm.languages" ng-bind="languageAnchor[language.code]"></td>
+                                <td class="col-xs-2 text-center">
+                                    <a class="action-icon glyphicon glyphicon-edit" href="javascript:void(0)" title="{{'common.EDIT' || 'Edit' | translate}}" ng-click="vm.showEditModal('save', languageAnchor)"></a>
+                                    <a class="action-icon glyphicon glyphicon-trash" href="javascript:void(0)" title="{{'common.DELETE' || 'Delete' | translate}}" ng-click="vm.remove(languageAnchor)"></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div align="center" ng-if="vm.languageAnchorsList.length/vm.options.limit>1">
+                        <uib-pagination boundary-links="true" items-per-page="vm.options.limit" max-size="8" total-items="vm.languageAnchorsList.length"
+                            ng-model="vm.options.page" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                            last-text="&raquo;">
+                        </uib-pagination>
+                    </div>
+                </uib-tab>
+                <uib-tab index="0" heading="{{'localization.LANGUAGE' || 'Language' | translate}}">
+                        <div class="row tab-panel-content">
+                            <div class="col-xs-7 col-lg-10 ">
+                                <button ng-click="vm.showEditModal('addLanguage')" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-plus btn-icon"></i>
+                                    <span translate="localization.NEW_LANGUAGE">New Language</span>
+                                </button>
+                            </div>
+                        </div>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th><span translate="localization.LANGUAGE">Language</span></th>
+                                    <th><span translate="localization.CODE">Code</span></th>
+                                    <th class="text-center"><span translate="localization.ACTION">action</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="language in vm.languages">
+                                    <td ng-bind="language.name"></td>
+                                    <td ng-bind="language.code"></td>
+                                    <td class="text-center">
+                                        <a class="action-icon glyphicon glyphicon-trash" title="{{'common.DELETE' || 'Delete' | translate}}" href="javascript:void(0)" ng-click="vm.removeLanguage(language)"></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </uib-tab>
+            </uib-tabset>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="/language_anchor_edit_modal_html">
+    <div class="modal-header">
+        <h3 class="modal-title" translate="localization.NEW_ANCHOR">Add New Language Anchor</h3>
+    </div>
+    <form role="form" name="editForm">
+        <div class="modal-body">
+            <div class="form-group">
+                <label><span translate="localization.KEY">Key</span></label>
+                <input autofocus type="text" class="form-control"
+                       ng-model="vm.currentLanguageAnchor.key" ng-required="true">
+            </div>
+            <div class="form-group" ng-repeat="language in vm.languages">
+                <label ng-bind="'localization.' + language.name || language.name | translate"></label>
+                <textarea rows="2" class="form-control"
+                          ng-model="vm.currentLanguageAnchor[language.code]" ng-required="true"></textarea>
+            </div>
+            <div class="form-group">
+                <label><span translate="localization.CLIENTS">Clients</span></label>
+                <div ng-repeat="client in vm.clients">
+                    <label class="check-box-label">
+                        <input name="clientCheckBox" ng-model="vm.currentLanguageAnchor.clientIsAbled[client.clientID]" type="checkbox">
+                        <span ng-bind="client.clientID"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer text-right">
+            <button class="btn" ng-click="$dismiss()">
+                <i class="btn-icon glyphicon glyphicon-remove"></i><span translate="common.CANCEL">Cancel</span>
+            </button>
+            <button
+                ng-disabled="editForm.$invalid"
+                ng-click="$close(vm.currentLanguageAnchor)"
+                type="submit" class="btn btn-default">
+                <span translate="common.SUBMIT">Submit</span>
+            </button>
+        </div>
+    </form>
+</script>
+<script type="text/ng-template" id="/language_edit_modal_html">
+    <div class="modal-header">
+        <h3 class="modal-title" translate="localization.NEW_LANGUAGE">Add New Language</h3>
+    </div>
+    <form role="form" name="editForm">
+        <div class="modal-body">
+            <div class="form-group">
+                <label translate="localization.NAME">Name</label>
+                <input autofocus type="text" class="form-control"
+                       ng-model="vm.currentLanguage.name" ng-required="true">
+            </div>
+            <div class="form-group">
+                <label translate="localization.CODE">Code</label>
+                <input type="text" class="form-control"
+                       ng-model="vm.currentLanguage.code" ng-required="true">
+            </div>
+        </div>
+        <div class="modal-footer text-right">
+            <button class="btn" ng-click="$dismiss()">
+                <i class="btn-icon glyphicon glyphicon-remove"></i><span translate="common.CANCEL">Cancel</span>
+            </button>
+            <button type="submit" class="btn btn-default"
+                ng-disabled="editForm.$invalid"
+                ng-click="$close(vm.currentLanguage, vm.currentLanguageIndex)">
+                <span translate="common.SUBMIT">Sumbit</span>
+            </button>
+        </div>
+    </form>
+</script>
+<script type="text/ng-template" id="/data_transform_edit_modal_html">
+    <div class="modal-header">
+        <h3 class="modal-title" ng-bind="vm.currentAction === 'import' ? 'localization.IMPORT' || 'Import' : 'localization.EXPORT' || 'Export' | translate"></h3>
+    </div>
+    <form role="form" name="editForm">
+        <div class="modal-body">
+            <textarea class="form-control" rows="20" ng-model="vm.JSONdata"></textarea>
+        </div>
+        <div class="modal-footer text-right">
+            <button class="btn" ng-click="$dismiss()">
+                <i class="btn-icon glyphicon glyphicon-remove"></i><span translate="common.CANCEL">Cancel</span>
+            </button>
+            <button type="submit" class="btn btn-default"
+                    ng-disabled="editForm.$invalid"
+                    ng-click="$close(vm.JSONdata)">
+                <span translate="common.SUBMIT">Sumbit</span>
+            </button>
+        </div>
+    </form>
+</script>
