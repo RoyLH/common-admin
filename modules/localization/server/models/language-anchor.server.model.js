@@ -26,6 +26,7 @@ LanguageAnchorSchema.statics = {
             .exec()
             .then((languageAnchor) => {
                 if (languageAnchor) return languageAnchor;
+
                 const err = new APIError({code: '102003', messageInfo: ['Language anchor']}, 404);
 
                 return Promise.reject(err);
