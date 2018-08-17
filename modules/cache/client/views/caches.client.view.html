@@ -1,0 +1,47 @@
+<div id="admin_cache_container" ng-init="vm.init()">
+    <div class="panel panel-default clearfix">
+        <!-- panel title -->
+        <div class="panel-heading hidden-xs">
+            <div class="panel-title">
+                <h2 translate="cache.TITLE">Redis</h2>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th><span translate="cache.KEY">Key</span></th>
+                    <th class="col-xs-2 text-center"><span translate="cache.ACTIONS">Action</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="cache in vm.cachesList">
+                    <td ng-bind="cache.key"></td>
+                    <td class="col-xs-2 text-center">
+                        <a class="action-icon glyphicon glyphicon-edit" href="javascript:void(0)" ng-click="vm.showEditModal('read', cache)"></a>
+                        <a class="action-icon glyphicon glyphicon-trash" href="javascript:void(0)" ng-click="vm.remove(cache)"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="/cache_edit_modal_html">
+    <div class="modal-header">
+        <h3 class="modal-title">Redis Detail</h3>
+    </div>
+    <form role="form" name="editForm">
+        <div class="modal-body">
+            <div class="form-group">
+                <textarea class="form-control" cols="30" rows="10"
+                ng-model="vm.currentRedis"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer text-right">
+            <button class="btn" ng-click="$dismiss()">
+                <i class="btn-icon glyphicon glyphicon-remove"></i>Cancel
+            </button>
+        </div>
+    </form>
+</script>
