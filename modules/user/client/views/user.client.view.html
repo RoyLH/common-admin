@@ -1,0 +1,234 @@
+<!--Common Design-->
+<!--Responsive Web Design-->
+<form id="user_selection" class="visible-xs">
+  <select class="form-control select" ng-model="vm.searchText"
+          ng-options="user.displayName as user.displayName for user in vm.users">
+    <option value="">--Search Staff--</option>
+  </select>
+</form>
+<div class="responsive">
+  <div class="panel panel-default user-form clearfix" ng-init="vm.refreshUser()">
+    <div class="panel-heading hidden-xs">
+      <div class="panel-title"><h2 translate="user.TITLE">Users List</h2></div>
+    </div>
+    <div class="panel-body" id="users_list" src="userTemplate.url">
+      <form class="hidden-xs form-inline col-md-4 col-sm-5 col-md-offset-8  col-sm-offset-7 text-right input-group">
+        <input name="searchText" type="text" class="form-control search-text" ng-model="vm.searchText"
+               ng-keyup="$event.keyCode === 13 ? vm.refreshUser() : 0;"
+               placeholder="{{'user.SEARCH_USER' || 'Search User' | translate}}" ng-change="vm.resetPage();">
+        <div id="jobs_search_button" class="input-group-addon" ng-click="vm.refreshUser();"><span
+          class="glyphicon glyphicon-search"></span></div>
+      </form>
+      <table class="table table-hover hidden-xs responsive" id="user_list">
+        <thead>
+        <tr class="table-head table-sortable">
+          <th class="width-md" sort order="'email'" target="'users'">
+            <span translate="user.EMAIL">Email</span>
+          </th>
+          <th sort order="'displayName'" target="'users'">
+              <span translate="user.DISPLAY_NAME">Display Name</span>
+          </th>
+          <th class="hidden-sm" sort order="'status'" target="'users'">
+              <span translate="user.STATUS">Status</span>
+          </th>
+          <th class="hidden-sm cell-size-action-lg">
+              <span translate="user.ACTIONS">Actions</span>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat-start="user in vm.users | orderBy: selectItemGroup.users : reverseGroup.users"
+            ng-class="{'show-detail': showDetail}">
+          <td ng-bind="user.email"></td>
+          <td ng-bind="user.displayName"></td>
+          <td class="hidden-sm" ng-bind="{'-1': 'Blocked', '0': 'First Login', '1': 'Active', '2': 'unconfirmed'}['' + user.status]"></td>
+          <td class="hidden-sm">
+            <a class="action-icon glyphicon glyphicon-edit" title="{{'common.EDIT' || 'Edit User' | translate}}" ng-click="vm.selectUser(user, 'update');"
+               href="javascript:void(0)"></a>
+            <a class="action-icon glyphicon glyphicon-trash" title="{{'common.DELETE' || 'Delete User' | translate}}" ng-if="user.status !== 1"
+               ng-click="vm.deleteUser(user)" href="javascript:void(0)"></a>
+            <a class="action-icon glyphicon glyphicon-ban-circle" title="{{'common.BLOCK' || 'Deactivate User' | translate}}" ng-if="user.status == 1"
+               ng-click="vm.selectUser(user, 'deactivate')" href="javascript:void(0)"></a>
+            <a class="action-icon glyphicon glyphicon-plus" title="{{'common.ACTIVATE' || 'Reactivate User' | translate}}"
+               ng-click="vm.selectUser(user, 'activate')" ng-if="user.status == -1 || user.status == 2" href="javascript:void(0)"></a>
+            <a class="action-icon glyphicon glyphicon-repeat" title="{{'common.RESET' || 'Reset User Password' | translate}}" ng-if="user.status !== -1 && user.status !== 2"
+               ng-click="vm.resetPassword(user);" href="javascript:void(0)"></a>
+          </td>
+        </tr>
+        <tr ng-if="showDetail" class="table-row-detail" ng-repeat-end="">
+          <td colspan="3">
+            <ul>
+              <li data-title="Status"
+                  ng-bind="{'-1': 'Blocked', '0': 'First Login', '1': 'Active'}['' + user.status]"></li>
+              <li data-title="Actions" ng-show="user.status !== 0">
+                <a class="action-icon glyphicon glyphicon-edit" title="{{'common.EDIT' || 'Edit User' | translate}}" ng-click="vm.selectUser(user, 'update');"
+                   href="javascript:void(0)"></a>
+                <a class="action-icon glyphicon glyphicon-trash" title="{{'common.DELETE' || 'Delete User' | translate}}" ng-if="user.status !== 1"
+                   ng-click="vm.deleteUser(user)" href="javascript:void(0)"></a>
+                <a class="action-icon glyphicon glyphicon-ban-circle" title="{{'common.BLOCK' || 'Deactivate User' | translate}}" ng-if="user.status == 1"
+                   ng-click="vm.selectUser(user, 'deactivate')" href="javascript:void(0)"></a>
+                <a class="action-icon glyphicon glyphicon-plus" title="{{'common.ACTIVATE' || 'Reactivate User' | translate}}"
+                   ng-click="vm.selectUser(user, 'activate')" ng-if="user.status == -1" href="javascript:void(0)"></a>
+                <a class="action-icon glyphicon glyphicon-repeat" title="{{'common.RESET' || 'Reset User Password' | translate}}" ng-if="user.status !== -1"
+                   ng-click="vm.resetPassword(user);" href="javascript:void(0)"></a>
+              </li>
+            </ul>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!--Responsive Web Design-->
+      <div class="row visible-xs"
+           ng-repeat="user in vm.users | filter: vm.searchText||'' |orderBy: selectItem:reverse">
+        <ul class="responsive-user-list clearfix">
+          <li class="">
+            <b ng-bind="user.displayName"></b>
+          </li>
+
+          <li class="pull-right">
+            <span ng-bind="{'-1': 'Blocked', '0': 'First Login', '1': 'Active'}['' + user.status]"></span>
+          </li>
+          <li class="">
+            <span ng-bind="user.email"></span>
+          </li>
+          <li class="pull-right">
+            <a class="action-icon glyphicon glyphicon-edit" title="{{'common.EDIT' || 'Edit User' | translate}}" ng-click="vm.selectUser(user, 'update');"
+               href="javascript:void(0)"></a>
+            <a class="action-icon glyphicon glyphicon-trash" title="{{'common.DELETE' || 'Delete User' | translate}}" ng-if="user.status !== 1"
+               ng-click="vm.deleteUser(user)" href="javascript:void(0)"></a>
+            <a class="action-icon glyphicon glyphicon-ban-circle" title="{{'common.BLOCK' || 'Deactivate User' | translate}}" ng-if="user.status == 1"
+               ng-click="vm.selectUser(user, 'deactivate')" href="javascript:void(0)"></a>
+            <a class="action-icon glyphicon glyphicon-plus" title="{{'common.ACTIVATE' || 'Reactivate User' | translate}}"
+               ng-click="vm.selectUser(user, 'activate')" ng-if="user.status == -1" href="javascript:void(0)"></a>
+            <a class="action-icon glyphicon glyphicon-repeat" title="{{'common.RESET' || 'Reset User Password' | translate}}" ng-if="user.status !== -1"
+               ng-click="vm.resetPassword(user);" href="javascript:void(0)"></a>
+          </li>
+        </ul>
+      </div>
+      <div class="report-none-message sm ng-hide" ng-show="vm.users.length == 0" id="user_none_message"><span translate="user.NO_USER">No User Found</span></div>
+    </div>
+    <!--<div class="panel-footer">-->
+      <!--<button id="users_add_button" class="btn btn-default" ng-click="vm.selectUser(null, 'add')">-->
+        <!--<span class="btn-icon glyphicon glyphicon-plus"></span><b>New User</b></button>-->
+    <!--</div>-->
+  </div>
+  <div align="center" ng-if="(vm.totalItemsCount/vm.pageOptions.limit)>1">
+    <uib-pagination boundary-links="true" ng-change="vm.refreshUser();" items-per-page="vm.pageOptions.limit"
+                    max-size="7" total-items="vm.totalItemsCount" ng-model="vm.pageOptions.page" class="pagination-sm"
+                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                    last-text="&raquo;">
+    </uib-pagination>
+  </div>
+</div>
+
+
+<script type="text/ng-template" id="/user_modal">
+  <div class="modal-header bg-success">
+    <h3 class="modal-title" translate="user.UPDATE_STAFF">Add New User</h3>
+  </div>
+  <div class="modal-body" ng-include src="vm.currentUserAction.tpl">
+  </div>
+  <div class="modal-footer text-right">
+    <button class="btn" ng-click="$dismiss()"><i class="btn-icon glyphicon glyphicon-remove"></i>Cancel
+    </button>
+    <button class="btn btn-default" ng-click="vm.operateUser()" ng-disabled="vm.current.form.$invalid"><i
+      class="btn-icon glyphicon glyphicon-ok"></i>{{vm.currentUserAction.text}}
+    </button>
+  </div>
+</script>
+<script type="text/ng-template" id="/add_user_form">
+  <form role="form" name="adduserForm" novalidate>
+    <div ng-init="vm.current.form = adduserForm" class="form-group"
+         ng-class="{ 'has-error' : adduserForm.email.$invalid && !adduserForm.email.$pristine }">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+        <input autofocus type="text" name="email" placeholder="{{'user.EMAIL' || 'Email' | translate}}" ng-model="vm.user.email" class="form-control"
+               ng-pattern="validation.email" ng-disabled="vm.currentUserAction.text=='Update'" required>
+      </div>
+      <p ng-show="adduserForm.email.$error.pattern" class="help-block ng-hide">Invalid email address</p>
+    </div>
+    <div class="form-group"
+         ng-class="{ 'has-error' : adduserForm.firstName.$invalid && !adduserForm.firstName.$pristine }">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input type="text" name="firstName" placeholder="{{'user.FIRST_NAME' || 'First Name' | translate}}" ng-model="vm.user.firstName"
+               class="form-control" ng-minlength="2" ng-maxlength="100" ng-pattern="validation.userName"
+               required>
+      </div>
+      <p ng-show="adduserForm.firstName.$error.pattern" class="help-block ng-hide">Alphabet only</p>
+
+      <p ng-show="!adduserForm.firstName.$error.pattern&&adduserForm.firstName.$error.minlength"
+         class="help-block ng-hide">Minimum Length is 2</p>
+
+      <p ng-show="!adduserForm.firstName.$error.pattern&&adduserForm.firstName.$error.maxlength"
+         class="help-block ng-hide">Maximum Length is 100</p>
+    </div>
+    <div class="form-group"
+         ng-class="{ 'has-error' : adduserForm.middleName.$invalid && !adduserForm.middleName.$pristine }">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input type="text" name="middleName" placeholder="{{'user.MIDDLE_NAME' || 'Middle Name (Optional)' | translate}}" ng-model="vm.user.middleName"
+               class="form-control" ng-minlength="2" ng-maxlength="100" ng-pattern="validation.userName">
+      </div>
+      <p ng-show="adduserForm.middleName.$error.pattern" class="help-block ng-hide">Alphabet only</p>
+
+      <p ng-show="!adduserForm.middleName.$error.pattern&&adduserForm.middleName.$error.minlength"
+         class="help-block ng-hide">Minimum Length is 2</p>
+
+      <p ng-show="!adduserForm.middleName.$error.pattern&&adduserForm.middleName.$error.maxlength"
+         class="help-block ng-hide">Maximum Length is 100</p>
+    </div>
+    <div class="form-group"
+         ng-class="{ 'has-error' : adduserForm.lastName.$invalid && !adduserForm.lastName.$pristine }">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input type="text" name="lastName" placeholder="{{'user.LAST_NAME' || 'Last Name' | translate}}" ng-model="vm.user.lastName" class="form-control"
+               ng-minlength="2" ng-maxlength="100" ng-pattern="validation.userName" required>
+      </div>
+      <p ng-show="adduserForm.lastName.$error.pattern" class="help-block ng-hide">Alphabet only</p>
+
+      <p ng-show="!adduserForm.lastName.$error.pattern&&adduserForm.lastName.$error.minlength"
+         class="help-block ng-hide">Minimum Length is 2</p>
+
+      <p ng-show="!adduserForm.lastName.$error.pattern&&adduserForm.lastName.$error.maxlength"
+         class="help-block ng-hide">Maximum Length is 100</p>
+    </div>
+
+  </form>
+</script>
+<script type="text/ng-template" id="/deactivate_user_form">
+  <form id="deactivate_user_form" class="form-horizontal" name="deactivateUserForm"
+        ng-submit="submitForm(deactivateUserForm.$valid)" novalidate>
+    <div ng-init="vm.current.form = deactivateUserForm" class="form-group">
+      <label class="col-sm-4 control-label">Display Name:</label>
+
+      <div class="col-sm-8">
+        <p class="form-control-static">{{vm.user.displayName}}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-4 control-label">E-mail ID:</label>
+
+      <div class="col-sm-8">
+        <p class="form-control-static">{{vm.user.email}}</p>
+      </div>
+    </div>
+    <div class="form-group"
+         ng-class="{'has-error': deactivateUserForm.changeReason.$invalid && !deactivateUserForm.changeReason.$pristine }">
+      <label class="col-sm-4 control-label required">Reason:</label>
+
+      <div class="col-sm-8">
+                <textarea autofocus rows="3" ng-model="vm.user.changeReason" name="changeReason" placeholder="{{'user.REASON' || 'Reason' | translate}}"
+                          autocomplete="off" ng-minlength="8" ng-maxlength="100" required
+                          class="form-control"></textarea>
+
+        <p ng-show="deactivateUserForm.changeReason.$error.minlength" class="help-block ng-hide">Minimum Length is
+          8</p>
+
+        <p ng-show="deactivateUserForm.changeReason.$error.maxlength" class="help-block ng-hide">Maximum Length is
+          100</p>
+      </div>
+    </div>
+  </form>
+</script>
