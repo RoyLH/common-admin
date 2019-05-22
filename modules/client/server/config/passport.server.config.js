@@ -1,9 +1,3 @@
-/**
- * Copyright 2014 Erealm Info & Tech.
- *
- * Created by ken on 06/03/2015.
- */
-
 'use strict';
 const mongoose = require('mongoose'),
   path = require('path'),
