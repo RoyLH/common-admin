@@ -4,35 +4,35 @@
  * Invoke Articles Permissions
  */
 exports.invokeRolesPolicies = (acl) => {
-    acl.allow([
+  acl.allow([
+    {
+      roles: ['admin', 'superuser'],
+      allows: [
         {
-            roles: ['admin', 'superuser'],
-            allows: [
-                {
-                    resources: '/app/emails',
-                    permissions: ['get', 'post']
-                },
-                {
-                    resources: '/app/emails/:emailId',
-                    permissions: '*'
-                },
-                {
-                    resources: '/app/emails/test/template',
-                    permissions: 'post'
-                }
-            ]
+          resources: '/app/emails',
+          permissions: ['get', 'post']
         },
         {
-            roles: ['user'],
-            allows: [
-                {
-                    resources: '/app/emails',
-                    permissions: ['get']
-                }, {
-                    resources: '/app/emails/:emailId',
-                    permissions: ['get']
-                }
-            ]
+          resources: '/app/emails/:emailId',
+          permissions: '*'
+        },
+        {
+          resources: '/app/emails/test/template',
+          permissions: 'post'
         }
-    ]);
+      ]
+    },
+    {
+      roles: ['user'],
+      allows: [
+        {
+          resources: '/app/emails',
+          permissions: ['get']
+        }, {
+          resources: '/app/emails/:emailId',
+          permissions: ['get']
+        }
+      ]
+    }
+  ]);
 };

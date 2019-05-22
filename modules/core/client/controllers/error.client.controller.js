@@ -1,17 +1,17 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    angular
+  angular
         .module('core')
         .controller('ErrorController', ErrorController);
 
-    ErrorController.$inject = ['$stateParams'];
+  ErrorController.$inject = ['$stateParams'];
 
-    function ErrorController($stateParams) {
-        var vm = this;
-        vm.errorMessage = null;
+  function ErrorController($stateParams) {
+    var vm = this;
+    vm.errorMessage = null;
 
         // Display custom message if it was set
-        if ($stateParams.message) vm.errorMessage = $stateParams.message;
-    }
+    if ($stateParams.message) vm.errorMessage = $stateParams.message;
+  }
 });

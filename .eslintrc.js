@@ -13,7 +13,7 @@ module.exports = {
     'func-names': 0,
     'guard-for-in': 2,
     'dot-notation': 1,
-    indent: [2, 4, {SwitchCase: 1}],
+    indent: [2, 2, {SwitchCase: 1}],
     'key-spacing': [2, {beforeColon: false, afterColon: true}],
     'keyword-spacing': [2, {before: true, after: true}],
     'max-len': 0,

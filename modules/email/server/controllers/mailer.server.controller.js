@@ -1,14 +1,19 @@
 'use strict';
 
 let fs = require('fs'),
-    _ = require('lodash'),
-    path = require('path'),
-    mongoose = require('mongoose'),
-    config = require(path.resolve('./config/config')),
-    EmailTemplate = mongoose.model('emailTemplate'),
-    handlebars = require('handlebars'),
-    Mailgun = require('mailgun-js'),
-    mailGun;
+  _ = require('lodash'),
+  path = require('path'),
+  mongoose = require('mongoose'),
+  config = require(path.resolve('./config/config')),
+  EmailTemplate = mongoose.model('emailTemplate'),
+  handlebars = require('handlebars'),
+  Mailgun = require('mailgun-js'),
+  mailGun;
+
+let saveToMailQueue = function (mailOptions, callback) {
+  if (!mailOptions || (mailOptions.mqID && mailOptions.mqID !== ''))
+    return;
+};
 
 /**
  *  Send mail
@@ -21,26 +26,21 @@ let fs = require('fs'),
  * @param {array} [mailOptions.attachments]                         Attachments
  */
 function sendMail(mailOptions) {
-    config.info('Mail: ', JSON.stringify(mailOptions));
-    mailGun.messages().send(mailOptions, function (err, body) {
+  config.info('Mail: ', JSON.stringify(mailOptions));
+  mailGun.messages().send(mailOptions, function (err, body) {
         // if fails, save to the mail queue.
-        if (err || !body.id || body.message !== 'Queued. Thank you.') {
-            saveToMailQueue(mailOptions, function (err, newMail) {
-                config.info('email options invalid, Error:', err, ', mailOptions: ', JSON.stringify(mailOptions));
-            });
-        }
-    });
+    if (err || !body.id || body.message !== 'Queued. Thank you.') {
+      saveToMailQueue(mailOptions, function (err, newMail) {
+        config.info('email options invalid, Error:', err, ', mailOptions: ', JSON.stringify(mailOptions));
+      });
+    }
+  });
 }
 
 function Mailer() {
-    mailGun = new Mailgun({ apiKey: config.mailGun.api_key, domain: config.mailGun.domain });
-    this.loadTemplates();
+  mailGun = new Mailgun({ apiKey: config.mailGun.api_key, domain: config.mailGun.domain });
+  this.loadTemplates();
 }
-
-let saveToMailQueue = function (mailOptions, callback) {
-    if (!mailOptions || (mailOptions.mqID && mailOptions.mqID !== ''))
-        return;
-};
 
 /**
  * Render email template
@@ -51,52 +51,52 @@ let saveToMailQueue = function (mailOptions, callback) {
  * @param {boolean} force
  */
 Mailer.prototype.renderEmailTemplate = function (title, data, callback, force) {
-    if (!title || !data || typeof callback !== 'function') {
-        console.error('render email with invalid params.');
-        return false;
+  if (!title || !data || typeof callback !== 'function') {
+    console.error('render email with invalid params.');
+    return false;
+  }
+
+  let template = null;
+  this.emailTemplates.every(function (item) {
+    if (title === item.title) {
+      template = item;
+      return false;
     }
+    return true;
+  });
 
-    let template = null;
-    this.emailTemplates.every(function (item) {
-        if (title === item.title) {
-            template = item;
-            return false;
-        }
-        return true;
-    });
+  !template && callback('Invalid title in render template.');
 
-    !template && callback('Invalid title in render template.');
+  !template.subject || !template.compliedBody && callback('template is invalid, please update template: ' + title);
 
-    !template.subject || !template.compliedBody && callback('template is invalid, please update template: ' + title);
-
-    callback(null, {
-        subject: template.subject,
-        body: template.compliedBody(data)
-    });
+  callback(null, {
+    subject: template.subject,
+    body: template.compliedBody(data)
+  });
 };
 
 Mailer.prototype.loadTemplates = function () {
-    let _self = this;
-    return EmailTemplate.find()
+  let _self = this;
+  return EmailTemplate.find()
         .then(templates => {
-            _self.emailTemplates = templates.map(template => {
-                let compliedBody;
-                try {
-                    compliedBody = handlebars.compile(template.body);
-                } catch (compileErr) {
-                    console.error(compileErr)
-                    return Promise.reject('compileErr happened in ' + template.title);
-                }
-                return {
-                    title: template.title,
-                    subject: template.subject,
-                    compliedBody: compliedBody
-                }
-            });
-            console.log('load templates successful');
-            return Promise.resolve();
+          _self.emailTemplates = templates.map(template => {
+            let compliedBody;
+            try {
+              compliedBody = handlebars.compile(template.body);
+            } catch (compileErr) {
+              console.error(compileErr);
+              return Promise.reject('compileErr happened in ' + template.title);
+            }
+            return {
+              title: template.title,
+              subject: template.subject,
+              compliedBody: compliedBody
+            };
+          });
+          console.log('load templates successful');
+          return Promise.resolve();
         })
-        .catch(err => Promise.reject(err))
+        .catch(err => Promise.reject(err));
 };
 
 Mailer.prototype.saveToMailQueue = saveToMailQueue;
@@ -112,33 +112,33 @@ Mailer.prototype.saveToMailQueue = saveToMailQueue;
  */
 Mailer.prototype.sendEmail = function (to, title, data, fromWho = config.mailGun.fromWho, attachments) {
 
-    let mailOptions = {};
-    if (attachments) {
-        mailOptions.attachments = attachments;
-    }
+  let mailOptions = {};
+  if (attachments) {
+    mailOptions.attachments = attachments;
+  }
 
-    if (data.html && data.subject) {
+  if (data.html && data.subject) {
+    sendMail(Object.assign(mailOptions, {
+      subject: data.subject,
+      to: to,
+      from: fromWho,
+      html: data.html
+    }));
+  } else {
+    this.renderEmailTemplate(title, data, function (err, result) {
+      if (!err && !!result) {
         sendMail(Object.assign(mailOptions, {
-            subject: data.subject,
-            to: to,
-            from: fromWho,
-            html: data.html
+          subject: result.subject,
+          to: to,
+          from: fromWho,
+          html: result.body
         }));
-    } else {
-        this.renderEmailTemplate(title, data, function (err, result) {
-            if (!err && !!result) {
-                sendMail(Object.assign(mailOptions, {
-                    subject: result.subject,
-                    to: to,
-                    from: fromWho,
-                    html: result.body
-                }));
-            } else {
-                config.error('error in rendering template ' + title + ', ' + err);
-                return;
-            }
-        });
-    }
+      } else {
+        config.error('error in rendering template ' + title + ', ' + err);
+        return;
+      }
+    });
+  }
 };
 
 module.exports = new Mailer();

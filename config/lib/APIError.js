@@ -2,22 +2,22 @@
  * @extends Error
  */
 class ExtendableError extends Error {
-    constructor(messageObj, status) {
-        let message,
-            messageInfo;
-        if (messageObj instanceof Object) {
-            message = messageObj.code;
-            messageInfo = messageObj.messageInfo;
-        } else {
-            message = messageObj;
-        }
-        super(message);
-        this.name = this.constructor.name;
-        this.code = message;
-        this.messageInfo = messageInfo;
-        this.status = status;
-        Error.captureStackTrace(this, this.constructor.name);
+  constructor(messageObj, status) {
+    let message,
+      messageInfo;
+    if (messageObj instanceof Object) {
+      message = messageObj.code;
+      messageInfo = messageObj.messageInfo;
+    } else {
+      message = messageObj;
     }
+    super(message);
+    this.name = this.constructor.name;
+    this.code = message;
+    this.messageInfo = messageInfo;
+    this.status = status;
+    Error.captureStackTrace(this, this.constructor.name);
+  }
 }
 
 /**
@@ -30,9 +30,9 @@ class APIError extends ExtendableError {
      * @param {string, object} messageObj - Error Object.
      * @param {number} status - HTTP status code of error.
      */
-    constructor(messageObj, status = 500) {
-        super(messageObj, status);
-    }
+  constructor(messageObj, status = 500) {
+    super(messageObj, status);
+  }
 }
 
 module.exports = APIError;

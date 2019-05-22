@@ -1,23 +1,23 @@
 (function () {
-    'use strict';
+  'use strict';
 
     // Setting up date
-    angular
+  angular
         .module('client')
         .config(routeConfig);
 
-    routeConfig.$inject = ['$stateProvider'];
+  routeConfig.$inject = ['$stateProvider'];
 
-    function routeConfig($stateProvider) {
-        $stateProvider
+  function routeConfig($stateProvider) {
+    $stateProvider
             .state('dashboard.client', {
-                url: 'dashboard/client',
-                templateUrl: '/modules/client/client/views/client.client.view.html',
-                controller: 'ClientController',
-                data: {
-                    pageTitle: 'Dashboard-Client',
-                    roles: ['superuser', 'admin']
-                }
+              url: 'dashboard/client',
+              templateUrl: '/modules/client/client/views/client.client.view.html',
+              controller: 'ClientController',
+              data: {
+                pageTitle: 'Dashboard-Client',
+                roles: ['superuser', 'admin']
+              }
             });
-    }
+  }
 }());

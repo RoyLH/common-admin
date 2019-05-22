@@ -15,7 +15,7 @@ insert_final_newline = true
 [**.{js,json}]
 trim_trailing_whitespace = true
 indent_style = space
-indent_size = 4
+indent_size = 2
 quote_type = single
 curly_bracket_next_line = false
 spaces_around_operators = true

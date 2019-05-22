@@ -1,67 +1,67 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    angular
+  angular
         .module('core')
         .config(routeConfig);
 
-    routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+  routeConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-    function routeConfig($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.rule(function ($injector, $location) {
-            var path = $location.path();
-            var hasTrailingSlash = path.length > 1 && path[path.length - 1] === '/';
+  function routeConfig($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.rule(function ($injector, $location) {
+      var path = $location.path();
+      var hasTrailingSlash = path.length > 1 && path[path.length - 1] === '/';
 
-            if (hasTrailingSlash) {
+      if (hasTrailingSlash) {
                 // if last character is a slash, return the same url without the slash
-                var newPath = path.substr(0, path.length - 1);
-                $location.replace().path(newPath);
-            }
-        });
+        var newPath = path.substr(0, path.length - 1);
+        $location.replace().path(newPath);
+      }
+    });
 
         // Redirect to 404 when route not found
-        $urlRouterProvider.otherwise(function ($injector, $location) {
-            $injector.get('$state').transitionTo('not-found', null, {
-                location: false
-            });
-        });
+    $urlRouterProvider.otherwise(function ($injector, $location) {
+      $injector.get('$state').transitionTo('not-found', null, {
+        location: false
+      });
+    });
 
-        $stateProvider
+    $stateProvider
             .state('dashboard', {
-                url: '/',
-                templateUrl: '/modules/core/client/views/index.client.view.html',
-                controller: 'DashboardController',
-                controllerAs: 'vm',
-                data: {
-                    pageTitle: 'Dashboard',
-                    roles: ['admin', 'superuser']
-                }
+              url: '/',
+              templateUrl: '/modules/core/client/views/index.client.view.html',
+              controller: 'DashboardController',
+              controllerAs: 'vm',
+              data: {
+                pageTitle: 'Dashboard',
+                roles: ['admin', 'superuser']
+              }
             })
             .state('home', {
-                url: '/home',
-                templateUrl: '/modules/core/client/views/home.client.view.html',
-                controller: 'ApplicationHomeController',
-                controllerAs: 'vm'
+              url: '/home',
+              templateUrl: '/modules/core/client/views/home.client.view.html',
+              controller: 'ApplicationHomeController',
+              controllerAs: 'vm'
             })
             .state('not-found', {
-                url: '/not-found',
-                templateUrl: '/modules/core/client/views/404.client.view.html',
-                controller: 'ErrorController',
-                controllerAs: 'vm',
-                data: {
-                    ignoreState: true,
-                    pageTitle: 'Not-Found'
-                }
+              url: '/not-found',
+              templateUrl: '/modules/core/client/views/404.client.view.html',
+              controller: 'ErrorController',
+              controllerAs: 'vm',
+              data: {
+                ignoreState: true,
+                pageTitle: 'Not-Found'
+              }
             })
             .state('bad-request', {
-                url: '/bad-request',
-                templateUrl: '/modules/core/client/views/400.client.view.html',
-                controller: 'ErrorController',
-                controllerAs: 'vm',
-                data: {
-                    ignoreState: true,
-                    pageTitle: 'Bad-Request'
-                }
+              url: '/bad-request',
+              templateUrl: '/modules/core/client/views/400.client.view.html',
+              controller: 'ErrorController',
+              controllerAs: 'vm',
+              data: {
+                ignoreState: true,
+                pageTitle: 'Bad-Request'
+              }
             });
-    }
+  }
 }());

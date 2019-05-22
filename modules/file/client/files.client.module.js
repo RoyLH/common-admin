@@ -1,5 +1,5 @@
 (function (app) {
-    'use strict';
+  'use strict';
 
-    app.registerModule('files', ['flow', 'as.sortable']);
+  app.registerModule('files', ['flow', 'as.sortable']);
 }(ApplicationConfiguration));

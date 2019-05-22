@@ -1,25 +1,25 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    angular
+  angular
         .module('auth')
         .controller('ChangePasswordController', ChangePasswordController);
 
-    ChangePasswordController.$inject = ['$scope', '$state', 'Authentication'];
+  ChangePasswordController.$inject = ['$scope', '$state', 'Authentication'];
 
-    function ChangePasswordController($scope, $state, Authentication) {
-        var vm = this;
-        vm.passwords = {};
+  function ChangePasswordController($scope, $state, Authentication) {
+    var vm = this;
+    vm.passwords = {};
 
-        vm.changePassword = function () {
-            Authentication.changePassword(vm.passwords).then(function () {
-                $state.go('authentication.signin');
-            });
-        };
+    vm.changePassword = function () {
+      Authentication.changePassword(vm.passwords).then(function () {
+        $state.go('authentication.signin');
+      });
+    };
 
-        vm.reset = function () {
-            $scope.changePwdForm.$setPristine();
-            vm.passwords = {};
-        };
-    }
+    vm.reset = function () {
+      $scope.changePwdForm.$setPristine();
+      vm.passwords = {};
+    };
+  }
 }());

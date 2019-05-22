@@ -1,6 +1,6 @@
 'use strict';
 
 (function (app) {
-    app.registerModule('staff');
+  app.registerModule('staff');
 
 }(ApplicationConfiguration));

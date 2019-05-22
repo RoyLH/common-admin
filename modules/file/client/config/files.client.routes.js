@@ -1,22 +1,22 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    angular.module('files')
+  angular.module('files')
         .config(routeConfig);
 
-    routeConfig.$inject = ['$stateProvider'];
+  routeConfig.$inject = ['$stateProvider'];
 
-    function routeConfig($stateProvider) {
-        $stateProvider
+  function routeConfig($stateProvider) {
+    $stateProvider
             .state('dashboard.files', {
-                url: 'dashboard/files',
-                templateUrl: '/modules/file/client/views/files.client.view.html',
-                controller: 'FilesController',
-                controllerAs: 'vm',
-                data: {
-                    pageTitle: 'Files',
-                    roles: ['superuser', 'admin']
-                }
+              url: 'dashboard/files',
+              templateUrl: '/modules/file/client/views/files.client.view.html',
+              controller: 'FilesController',
+              controllerAs: 'vm',
+              data: {
+                pageTitle: 'Files',
+                roles: ['superuser', 'admin']
+              }
             });
-    }
+  }
 }());

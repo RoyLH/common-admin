@@ -1,22 +1,22 @@
 (function (params) {
-    'use strict';
+  'use strict';
 
-    angular
+  angular
         .module('cache')
         .config(routeConfig);
 
-    routeConfig.$inject = ['$stateProvider'];
+  routeConfig.$inject = ['$stateProvider'];
 
-    function routeConfig($stateProvider) {
-        $stateProvider
+  function routeConfig($stateProvider) {
+    $stateProvider
             .state('dashboard.cache', {
-                url: 'dashboard/cache',
-                controller: 'CachesController',
-                controllerAs: 'vm',
-                templateUrl: '/modules/cache/client/views/caches.client.view.html',
-                data: {
-                    pageTitle: 'Edit cache'
-                }
+              url: 'dashboard/cache',
+              controller: 'CachesController',
+              controllerAs: 'vm',
+              templateUrl: '/modules/cache/client/views/caches.client.view.html',
+              data: {
+                pageTitle: 'Edit cache'
+              }
             });
-    }
+  }
 }());

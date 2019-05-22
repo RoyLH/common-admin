@@ -4,32 +4,32 @@
  *  Invoke Messages Permissions
  **/
 exports.invokeRolesPolicies = (acl) => {
-    acl.allow([
+  acl.allow([
+    {
+      roles: ['admin', 'superuser'],
+      allows: [
         {
-            roles: ['admin', 'superuser'],
-            allows: [
-                {
-                    resources: '/app/config',
-                    permissions: '*'
-                },
-                {
-                    resources: '/app/config/:configId',
-                    permissions: '*'
-                }
-            ]
+          resources: '/app/config',
+          permissions: '*'
         },
         {
-            roles: ['guest'],
-            allows: [
-                {
-                    resources: '/app/config',
-                    permissions: ['get']
-                },
-                {
-                    resources: '/app/config/:configId',
-                    permissions: ['get']
-                }
-            ]
+          resources: '/app/config/:configId',
+          permissions: '*'
         }
-    ]);
+      ]
+    },
+    {
+      roles: ['guest'],
+      allows: [
+        {
+          resources: '/app/config',
+          permissions: ['get']
+        },
+        {
+          resources: '/app/config/:configId',
+          permissions: ['get']
+        }
+      ]
+    }
+  ]);
 };

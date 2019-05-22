@@ -3,31 +3,31 @@
  */
 (function () {
 
-    'use strict';
+  'use strict';
 
-    angular.module('email')
+  angular.module('email')
     .factory('EmailService', EmailService);
 
-    EmailService.$inject = ['$resource'];
+  EmailService.$inject = ['$resource'];
 
-    function EmailService($resource) {
+  function EmailService($resource) {
 
-        var Emails = $resource('app/emails/:emailId',
-            {
-                emailId: '@_id'
-            },
-            {
-                update: {
-                    method: 'PUT'
-                },
-                sendTestEmail: {
-                    method: 'POST',
-                    url: '/app/emails/test/template'
-                }
-            }
+    var Emails = $resource('app/emails/:emailId',
+      {
+        emailId: '@_id'
+      },
+      {
+        update: {
+          method: 'PUT'
+        },
+        sendTestEmail: {
+          method: 'POST',
+          url: '/app/emails/test/template'
+        }
+      }
         );
 
-        return Emails;
-    }
+    return Emails;
+  }
 
 }());

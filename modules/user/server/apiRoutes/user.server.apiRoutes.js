@@ -1,12 +1,12 @@
 'use strict';
 
 const path = require('path'),
-    authHelper = require(path.resolve('./config/lib/auth')),
-    express = require('express'),
-    userController = require('../controllers/user.server.controller'),
-    userUpsert = require('../controllers/user-upsert.server.controller'),
-    oauth2 = require('../controllers/oauth2.server.controller'),
-    router = express.Router();
+  authHelper = require(path.resolve('./config/lib/auth')),
+  express = require('express'),
+  userController = require('../controllers/user.server.controller'),
+  userUpsert = require('../controllers/user-upsert.server.controller'),
+  oauth2 = require('../controllers/oauth2.server.controller'),
+  router = express.Router();
 
 router.param('userId', userController.userById);
 router.route('/users/:userId').get(userController.read);

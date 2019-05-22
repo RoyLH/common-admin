@@ -1,26 +1,26 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    angular
+  angular
     .module('feedback')
     .factory('FeedbacksService', FeedbacksService);
 
-    FeedbacksService.$inject = ['$resource'];
+  FeedbacksService.$inject = ['$resource'];
 
-    function FeedbacksService($resource) {
-        var Feedback = $resource('app/feedbacks/:feedbackId', {
-            feedbackId: '@_id'
-        }, {
-            save: {
-                method: 'POST',
-                headers: {'background': 'true'}
-            },
-            paginate: {
-                method: 'GET',
-                url: 'app/feedbacks'
-            }
-        });
+  function FeedbacksService($resource) {
+    var Feedback = $resource('app/feedbacks/:feedbackId', {
+      feedbackId: '@_id'
+    }, {
+      save: {
+        method: 'POST',
+        headers: {'background': 'true'}
+      },
+      paginate: {
+        method: 'GET',
+        url: 'app/feedbacks'
+      }
+    });
 
-        return Feedback;
-    }
+    return Feedback;
+  }
 }());

@@ -1,19 +1,19 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    angular
+  angular
         .module('config')
         .factory('ConfigService', ConfigService);
 
-    ConfigService.$inject = ['$resource'];
+  ConfigService.$inject = ['$resource'];
 
-    function ConfigService($resource) {
-        return $resource('app/config/:configId', {
-            configId: '@_id'
-        }, {
-            update: {
-                method: 'PUT'
-            }
-        });
-    }
+  function ConfigService($resource) {
+    return $resource('app/config/:configId', {
+      configId: '@_id'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
+  }
 }());

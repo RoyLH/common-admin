@@ -1,6 +1,6 @@
 (function (app) {
-    'use strict';
+  'use strict';
 
-    app.registerModule('core');
-    app.registerModule('core.routes');
+  app.registerModule('core');
+  app.registerModule('core.routes');
 }(ApplicationConfiguration));

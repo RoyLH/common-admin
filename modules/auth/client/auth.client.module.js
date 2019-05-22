@@ -1,5 +1,5 @@
 (function (app) {
-    'use strict';
+  'use strict';
 
-    app.registerModule('auth');
+  app.registerModule('auth');
 }(ApplicationConfiguration));

@@ -1,28 +1,28 @@
 'use strict';
 
 exports.invokeRolesPolicies = (acl) => {
-    acl.allow([
+  acl.allow([
+    {
+      roles: ['admin', 'superuser'],
+      allows: [
         {
-            roles: ['admin', 'superuser'],
-            allows: [
-                {
-                    resources: '/app/auth/password',
-                    permissions: ['put']
-                }
-            ]
+          resources: '/app/auth/password',
+          permissions: ['put']
+        }
+      ]
+    },
+    {
+      roles: ['guest'],
+      allows: [
+        {
+          resources: '/app/auth/signout',
+          permissions: ['*']
         },
         {
-            roles: ['guest'],
-            allows: [
-                {
-                    resources: '/app/auth/signout',
-                    permissions: ['*']
-                },
-                {
-                    resources: '/app/auth/signin',
-                    permissions: ['*']
-                }
-            ]
+          resources: '/app/auth/signin',
+          permissions: ['*']
         }
-    ]);
+      ]
+    }
+  ]);
 };

@@ -1,30 +1,30 @@
 'use strict';
 
 exports.invokeRolesPolicies = (acl) => {
-    acl.allow([
+  acl.allow([
+    {
+      roles: ['admin', 'superuser'],
+      allows: [
         {
-            roles: ['admin', 'superuser'],
-            allows: [
-                {
-                    resources: '/app/caches',
-                    permissions: '*'
-                }, {
-                    resources: '/app/caches/:key',
-                    permissions: '*'
-                }
-            ]
-        },
-        {
-            roles: ['guest'],
-            allows: [
-                {
-                    resources: '/app/caches',
-                    permissions: ['get']
-                }, {
-                    resources: '/app/caches/:cacheId',
-                    permissions: ['get']
-                }
-            ]
+          resources: '/app/caches',
+          permissions: '*'
+        }, {
+          resources: '/app/caches/:key',
+          permissions: '*'
         }
-    ]);
+      ]
+    },
+    {
+      roles: ['guest'],
+      allows: [
+        {
+          resources: '/app/caches',
+          permissions: ['get']
+        }, {
+          resources: '/app/caches/:cacheId',
+          permissions: ['get']
+        }
+      ]
+    }
+  ]);
 };

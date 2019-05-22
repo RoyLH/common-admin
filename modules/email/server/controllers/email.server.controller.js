@@ -1,26 +1,26 @@
 'use strict';
 
 let path = require('path'),
-    mongoose = require('mongoose'),
-    config = require(path.resolve('./config/config')),
-    EmailTemplate = mongoose.model('emailTemplate'),
-    _ = require('lodash'),
-    APIError = require(path.resolve('./config/lib/APIError')),
-    mailer = require('./mailer.server.controller');
+  mongoose = require('mongoose'),
+  config = require(path.resolve('./config/config')),
+  EmailTemplate = mongoose.model('emailTemplate'),
+  _ = require('lodash'),
+  APIError = require(path.resolve('./config/lib/APIError')),
+  mailer = require('./mailer.server.controller');
 
 /**
  * Create an email
  */
 exports.create = (req, res, next) => {
-    let emailTemplate = new EmailTemplate(req.body);
-    emailTemplate.save()
+  let emailTemplate = new EmailTemplate(req.body);
+  emailTemplate.save()
         .then(newTemplate => {
-            mailer.loadTemplates();
-            return res.send({
-                code: '402001',
-                data: newTemplate,
-                messageInfo: ['Template', newTemplate.name]
-            });
+          mailer.loadTemplates();
+          return res.send({
+            code: '402001',
+            data: newTemplate,
+            messageInfo: ['Template', newTemplate.name]
+          });
         })
         .catch(next);
 };
@@ -29,27 +29,27 @@ exports.create = (req, res, next) => {
  * get email info by _id
  */
 exports.read = (req, res, next) => {
-    const emailTemplate = req.emailTemplate;
-    return res.send({
-        code: '400000',
-        data: emailTemplate
-    });
+  const emailTemplate = req.emailTemplate;
+  return res.send({
+    code: '400000',
+    data: emailTemplate
+  });
 };
 
 /**
  * Update an Email
  */
 exports.update = (req, res, next) => {
-    let emailTemplate = req.emailTemplate;
-    emailTemplate = _.merge(emailTemplate, req.body);
-    emailTemplate.save()
+  let emailTemplate = req.emailTemplate;
+  emailTemplate = _.merge(emailTemplate, req.body);
+  emailTemplate.save()
         .then(emailTemplate => {
-            mailer.loadTemplates();
-            return res.send({
-                code: '402002',
-                data: emailTemplate,
-                messageInfo: ['Template', emailTemplate.name]
-            });
+          mailer.loadTemplates();
+          return res.send({
+            code: '402002',
+            data: emailTemplate,
+            messageInfo: ['Template', emailTemplate.name]
+          });
         })
         .catch(next);
 };
@@ -58,15 +58,15 @@ exports.update = (req, res, next) => {
  * Delete an Email
  */
 exports.delete = (req, res, next) => {
-    let emailTemplate = req.emailTemplate;
-    emailTemplate.remove()
+  let emailTemplate = req.emailTemplate;
+  emailTemplate.remove()
         .then(emaiTemplate => {
-            mailer.loadTemplates();
-            return res.send({
-                code: '402003',
-                data: emaiTemplate,
-                messageInfo: ['Template', emailTemplate.name]
-            });
+          mailer.loadTemplates();
+          return res.send({
+            code: '402003',
+            data: emaiTemplate,
+            messageInfo: ['Template', emailTemplate.name]
+          });
         })
         .catch(next);
 };
@@ -75,14 +75,14 @@ exports.delete = (req, res, next) => {
  * List of Email
  */
 exports.list = (req, res, next) => {
-    EmailTemplate.find()
+  EmailTemplate.find()
         .sort('-createTime')
         .exec((err, emailTemplates) => {
-            if (err) {
-                return next(err);
-            } else {
-                return res.send({ code: '400000', data: emailTemplates });
-            }
+          if (err) {
+            return next(err);
+          } else {
+            return res.send({ code: '400000', data: emailTemplates });
+          }
         });
 };
 
@@ -100,13 +100,13 @@ exports.list = (req, res, next) => {
  * @param {function} next
  */
 exports.send = (req, res, next) => {
-    const { target, title, fromWho, info } = req.body;
-    if (!target || !title || !info) {
-        return next(new APIError('102001', 400));
-    }
+  const { target, title, fromWho, info } = req.body;
+  if (!target || !title || !info) {
+    return next(new APIError('102001', 400));
+  }
 
-    mailer.sendEmail(target, title, info, fromWho);
-    return res.send({ code: '403001' });
+  mailer.sendEmail(target, title, info, fromWho);
+  return res.send({ code: '403001' });
 };
 
 /**
@@ -114,18 +114,18 @@ exports.send = (req, res, next) => {
  */
 exports.emailByID = (req, res, next, id) => {
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return next(new APIError('102001', 400));
-    }
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return next(new APIError('102001', 400));
+  }
 
-    EmailTemplate.findById(id)
+  EmailTemplate.findById(id)
         .exec((err, emailTemplate) => {
-            if (err) {
-                return next(err);
-            } else if (!emailTemplate) {
-                return next(new APIError({ code: '102003', messageInfo: ['EmailTemplate'] }, 400));
-            }
-            req.emailTemplate = emailTemplate;
-            next();
+          if (err) {
+            return next(err);
+          } else if (!emailTemplate) {
+            return next(new APIError({ code: '102003', messageInfo: ['EmailTemplate'] }, 400));
+          }
+          req.emailTemplate = emailTemplate;
+          next();
         });
 };

@@ -1,6 +1,6 @@
 (function (app) {
-    'use strict';
+  'use strict';
 
-    app.registerModule('user');
+  app.registerModule('user');
 
 }(ApplicationConfiguration));

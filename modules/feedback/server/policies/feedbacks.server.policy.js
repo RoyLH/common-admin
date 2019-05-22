@@ -1,32 +1,32 @@
 'use strict';
 
 exports.invokeRolesPolicies = function (acl) {
-    acl.allow([
+  acl.allow([
+    {
+      roles: ['admin', 'superuser'],
+      allows: [
         {
-            roles: ['admin', 'superuser'],
-            allows: [
-                {
-                    resources: '/app/feedbacks',
-                    permissions: '*'
-                },
-                {
-                    resources: '/app/feedbacks/:feedbackId',
-                    permissions: '*'
-                }
-            ]
+          resources: '/app/feedbacks',
+          permissions: '*'
         },
         {
-            roles: ['guest'],
-            allows: [
-                {
-                    resources: '/app/feedbacks',
-                    permissions: ['get', 'post']
-                },
-                {
-                    resources: '/app/feedbacks/:feedbackId',
-                    permissions: ['get']
-                }
-            ]
+          resources: '/app/feedbacks/:feedbackId',
+          permissions: '*'
         }
-    ]);
+      ]
+    },
+    {
+      roles: ['guest'],
+      allows: [
+        {
+          resources: '/app/feedbacks',
+          permissions: ['get', 'post']
+        },
+        {
+          resources: '/app/feedbacks/:feedbackId',
+          permissions: ['get']
+        }
+      ]
+    }
+  ]);
 };
