@@ -1,7 +1,7 @@
 (function (app) {
 
-    'use strict';
+  'use strict';
 
-    app.registerModule('email', ['textAngular']);
+  app.registerModule('email', ['textAngular']);
 
 }(ApplicationConfiguration));

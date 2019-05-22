@@ -1,7 +1,7 @@
 (function (app) {
 
-    'use strict';
+  'use strict';
 
-    app.registerModule('config', ['as.sortable']);
+  app.registerModule('config', ['as.sortable']);
 
 }(ApplicationConfiguration));
